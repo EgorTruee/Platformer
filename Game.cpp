@@ -10,11 +10,11 @@ void Game::start()
     }
 }
 
-void Game::update()
+void Game::update(float delta)
 {
     for (auto object : objects)
     {
-        object->update();
+        object->update(delta);
     }
 }
 
@@ -29,4 +29,12 @@ std::vector<const sf::Drawable*> Game::getDrawable()
         std::copy(t.begin(), t.end(), drawable.end());
     }
     return drawable;
+}
+
+Game::~Game()
+{
+    for (auto object : objects)
+    {
+        delete object;
+    }
 }

@@ -1,13 +1,16 @@
 #include <SFML/Graphics.hpp>
 
+#include "Game.h"
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!", sf::Style::Fullscreen);
-    sf::RectangleShape shape(sf::Vector2f(100.f, 100.f));
     sf::Vector2f pos(0, 0), vel(100, 100);
     sf::Clock clock;
+    sf::Time t1, t2;
+    Game game;
 
-    shape.setFillColor(sf::Color::Blue);
+    game.start();
 
     while (window.isOpen())
     {
@@ -21,20 +24,16 @@ int main()
                 window.close();
             }
         }
-        if (pos.x > 1820 || pos.x < 0)
-        {
-            vel.x *= -1;
-        }
-        if (pos.y > 980 || pos.y < 0)
-        {
-            vel.y *= -1;
-        }
-        pos += vel * clock.getElapsedTime().asSeconds();
-        
-        clock.restart();
-        shape.setPosition(pos);
+        t2 = t1;
+        t1 = clock.getElapsedTime();
+
+        game.update((t2 - t1).asSeconds());
         window.clear();
-        window.draw(shape);
+
+        for (auto drawable : game.getDrawable())
+        {
+            window.draw(*drawable);
+        }
         window.display();
     }
 

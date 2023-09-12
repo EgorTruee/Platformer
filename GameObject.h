@@ -13,8 +13,12 @@ public:
 	GameObject(GameObject&&) = default;
 
 	virtual void start() = 0;
-	virtual void update() = 0;
+	virtual void update(float delta) = 0;
 	virtual std::vector<const sf::Drawable*> getDrawable() = 0;
+
+protected:
+
+	sf::Vector2f Pos;
 
 private:
 };
