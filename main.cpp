@@ -6,8 +6,6 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!", sf::Style::Fullscreen);
     sf::Vector2f pos(0, 0), vel(100, 100);
-    sf::Clock clock;
-    sf::Time t1, t2;
     Game game;
 
     game.start();
@@ -21,13 +19,24 @@ int main()
                 window.close();
             if (event.type == sf::Event::KeyPressed)
             {
-                window.close();
+                if (event.key.scancode == sf::Keyboard::Scan::Space)
+                {
+                    if (game.isPaused())
+                    {
+                        game.start();
+                    }
+                    else
+                    {
+                        game.stop();
+                    }
+                }
+                else
+                {
+                    window.close();
+                }
             }
         }
-        t2 = t1;
-        t1 = clock.getElapsedTime();
-
-        game.update((t2 - t1).asSeconds());
+        game.update();
         window.clear();
 
         for (auto drawable : game.getDrawable())

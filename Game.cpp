@@ -1,32 +1,56 @@
 #include "Game.h"
 
+#include "Moving.h"
+
 #include <algorithm>
+#include <iostream>
+
+Game::Game() :
+    paused(true)
+{
+}
 
 void Game::start()
 {
+    clock.restart();
+
+    t1 = clock.getElapsedTime();
+    paused = false;
+
+    createGameObject<Moving>();
+}
+void Game::stop()
+{
+    update();
+    paused = true;
+}
+void Game::update()
+{
+    if (paused)
+    {
+        return;
+    }
+    t2 = clock.getElapsedTime();
+    
     for (auto object : objects)
     {
-        object->start();
+        object->update((t2 - t1).asSeconds());
     }
+    t1 = t2;
 }
 
-void Game::update(float delta)
+std::vector<sf::Drawable*> Game::getDrawable()
 {
-    for (auto object : objects)
-    {
-        object->update(delta);
-    }
-}
-
-std::vector<const sf::Drawable*> Game::getDrawable()
-{
-    std::vector<const sf::Drawable*> drawable;
+    std::vector<sf::Drawable*> drawable;
 
     for (auto object : objects)
     {
-        std::vector<const sf::Drawable*> t = object->getDrawable();
+        std::vector<sf::Drawable*> t = object->getDrawable();
 
-        std::copy(t.begin(), t.end(), drawable.end());
+        for (auto i : t)
+        {
+            drawable.push_back(i);
+        }
     }
     return drawable;
 }
