@@ -36,8 +36,8 @@ bool Collision::isInside(const sf::Vector2f& pos) const
 	{
 		sf::Vector2f p = points[(i - 1) % points.size()];
 		sf::Vector2f a = points[i % points.size()] - points[(i - 1) % points.size()];
-		float t1 = (p.y * a.x - p.x * a.y) / (b.y * a.x - b.x * a.y);
-		float t2 = (b.x * p.y - b.y * p.x) / (b.y * a.x - b.x * a.y);
+		float t2 = (p.y * a.x - p.x * a.y) / (b.y * a.x - b.x * a.y);
+		float t1 = (b.x * p.y - b.y * p.x) / (b.y * a.x - b.x * a.y);
 		
 		if (0 <= t1 && t1 < 1 && 0 <= t2 && t2 < 1)
 		{

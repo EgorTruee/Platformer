@@ -4,6 +4,8 @@
 #include <SFML/Graphics/Transformable.hpp>
 #include <vector>
 
+#include "Delegate.h"
+
 class Collision : public sf::Transformable
 {
 public:
@@ -19,7 +21,6 @@ public:
 	sf::FloatRect getBigRect() const;
 	bool isInside(const sf::Vector2f& pos) const;
 	bool isColiding(const Collision& other) const;
-
 	std::vector<sf::Vector2f> getPoints() const;
 
 	void setPoints(const std::vector<sf::Vector2f>& points);
@@ -27,10 +28,13 @@ public:
 	void setAcceleration(sf::Vector2f Acceleration);
 	void update(float dt);
 
+	Delegate<Collision&, Collision&> onCollision;
+
 private:
 
 	std::vector<sf::Vector2f> points;
 	sf::Vector2f v = { 0, 0 };
 	sf::Vector2f a = { 0, 0 };
+	bool isColliding = false, wasColliding = false;
 };
 
