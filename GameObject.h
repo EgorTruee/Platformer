@@ -3,31 +3,36 @@
 #include <SFML/Graphics/Drawable.hpp>
 
 #include <vector>
+#include <memory>
 
-class GameObject
+class Collision;
+
+class GameObject : public sf::Drawable
 {
 public:
 
 	GameObject();
+	explicit GameObject(const Collision& collider);
 	GameObject(const GameObject&) = default;
 	GameObject(GameObject&&) = default;
 
 	virtual void update(float delta) = 0;
-	virtual std::vector<sf::Drawable*> getDrawable() = 0;
 
 	void setPosition(sf::Vector2f position);
-	void setAngle(float angle);
+	void setRotation(float angle);
 
-	sf::Vector2f getPosition();
-	float getAngel();
+	sf::Vector2f getPosition() const;
+	float getRotation() const;
+	std::shared_ptr<Collision> getCollision() const;
 
 	virtual ~GameObject() {}
 
 protected:
 
-	sf::Vector2f pos;
-	float angle;
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates state) const override;
 
 private:
+
+	std::shared_ptr<Collision> collision;
 };
 

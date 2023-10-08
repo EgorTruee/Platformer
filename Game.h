@@ -1,15 +1,15 @@
 #pragma once
 
-#include "GameObject.h"
-
 #include <vector>
-#include <utility>
+#include <memory>
 
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/System/Time.hpp>
 #include <SFML/System/Clock.hpp>
 
-class Game
+class GameObject;
+
+class Game : public sf::Drawable
 {
 public:
 
@@ -20,22 +20,33 @@ public:
 	void update();
 
 	bool isPaused() { return paused; }
-	std::vector<sf::Drawable*> getDrawable();
 
-	template<class Object, typename... Args>
-	void createGameObject(Args&... args);
 	~Game();
+
+	template<class Object, typename ...Args>
+	std::shared_ptr<Object> createGameObject(Args&&...);
+
+protected:
+
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 private:
 
-	std::vector<GameObject*> objects;
+	void updateObjects(float dt);
+	void updatePhysics(float dt);
+
+	std::vector<std::shared_ptr<GameObject>> objects;
 	sf::Time t1, t2;
 	sf::Clock clock;
 	bool paused;
 };
 
-template<class Object, typename... Args>
-inline void Game::createGameObject(Args&... args)
+template<class Object, typename ...Args>
+inline std::shared_ptr<Object> Game::createGameObject(Args&&... args)
 {
-	objects.push_back(new Object(std::forward<Args>(args)...));
+	std::shared_ptr<Object> t = std::make_shared<Object>(std::forward<Args>(args)...);
+
+	objects.push_back(t);
+
+	return t;
 }

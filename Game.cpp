@@ -1,6 +1,10 @@
 #include "Game.h"
 
+#include "GameObject.h"
 #include "Moving.h"
+#include "Collision.h"
+
+#include <SFML/Graphics/RenderTarget.hpp>
 
 #include <algorithm>
 #include <iostream>
@@ -8,6 +12,8 @@
 Game::Game() :
     paused(true)
 {
+    createGameObject<Moving>(Collision({ 0,0 }, { 10, 10 }, { 0, 0 }, { {10, 10}, {-10, 10}, {-10, -10}, {10, -10} }));
+    createGameObject<Moving>(Collision({ 100, 100 }, { 0, 0 }, { 0, 0 }, { {10, 10}, {-10, 10}, {-10, -10}, {10, -10} }));
 }
 
 void Game::start()
@@ -16,8 +22,6 @@ void Game::start()
 
     t1 = clock.getElapsedTime();
     paused = false;
-
-    createGameObject<Moving>();
 }
 void Game::stop()
 {
@@ -32,33 +36,49 @@ void Game::update()
     }
     t2 = clock.getElapsedTime();
     
-    for (auto object : objects)
-    {
-        object->update((t2 - t1).asSeconds());
-    }
+    updateObjects((t2 - t1).asSeconds());
+    updatePhysics((t2 - t1).asSeconds());
+
     t1 = t2;
-}
-
-std::vector<sf::Drawable*> Game::getDrawable()
-{
-    std::vector<sf::Drawable*> drawable;
-
-    for (auto object : objects)
-    {
-        std::vector<sf::Drawable*> t = object->getDrawable();
-
-        for (auto i : t)
-        {
-            drawable.push_back(i);
-        }
-    }
-    return drawable;
 }
 
 Game::~Game()
 {
-    for (auto object : objects)
+}
+
+void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    for (auto& i : objects)
     {
-        delete object;
+        target.draw(*i, states);
+    }
+}
+
+void Game::updateObjects(float dt)
+{
+    for (auto& object : objects)
+    {
+        object->update(dt);
+    }
+}
+
+void Game::updatePhysics(float dt)
+{
+    for (auto& i : objects)
+    {
+        i->getCollision()->update(dt);
+    }
+    for (int i = 0; i < objects.size(); i++)
+    {
+        for (int j = i + 1; j < objects.size(); j++)
+        {
+            std::shared_ptr<Collision> collision1 = objects[i]->getCollision();
+            std::shared_ptr<Collision> collision2 = objects[j]->getCollision();
+
+            if (collision1->isColiding(*collision2))
+            {
+                std::cout << "Colliding" << std::endl;
+            }
+        }
     }
 }

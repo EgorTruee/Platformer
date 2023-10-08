@@ -4,7 +4,7 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!", sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode(1000, 500), "Platformer"/*, sf::Style::Fullscreen */ );
     sf::Vector2f pos(0, 0), vel(100, 100);
     Game game;
 
@@ -38,11 +38,7 @@ int main()
         }
         game.update();
         window.clear();
-
-        for (auto drawable : game.getDrawable())
-        {
-            window.draw(*drawable);
-        }
+        window.draw(game);
         window.display();
     }
 
