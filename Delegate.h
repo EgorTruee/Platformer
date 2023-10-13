@@ -12,7 +12,7 @@ public:
 	void attach(std::shared_ptr<std::function<void(Args...)>> listener);
 	void detach(std::shared_ptr<std::function<void(Args...)>> listener);
 
-	void invoke(Args&&... args) const;
+	void invoke(Args... args) const;
 
 private:
 	
@@ -38,10 +38,10 @@ inline void Delegate<Args...>::detach(std::shared_ptr<std::function<void(Args...
 }
 
 template<typename ...Args>
-inline void Delegate<Args...>::invoke(Args&& ...args) const
+inline void Delegate<Args...>::invoke(Args ...args) const
 {
 	for (auto i : listeners)
 	{
-		i->operator()(std::forward<Args>(args)...);
+		i->operator()(args...);
 	}
 }

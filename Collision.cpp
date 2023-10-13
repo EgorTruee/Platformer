@@ -1,5 +1,7 @@
 #include "Collision.h"
 
+#include <algorithm>
+
 Collision::Collision(const std::vector<sf::Vector2f> vertex) :
 	points(vertex)
 {
@@ -20,9 +22,9 @@ sf::FloatRect Collision::getBigRect() const
 	for (auto i : points)
 	{
 		left = fminf(left, i.x);
-		top = fmax(top, i.y);
-		right = fmax(right, i.x);
-		bottom = fmin(bottom, i.y);
+		top = fmaxf(top, i.y);
+		right = fmaxf(right, i.x);
+		bottom = fminf(bottom, i.y);
 	}
 	return sf::FloatRect(left + getPosition().x, top + getPosition().y, right - left, top - bottom);
 }
@@ -79,8 +81,41 @@ void Collision::setAcceleration(sf::Vector2f Acceleration)
 	a = Acceleration;
 }
 
+void Collision::collide(std::shared_ptr<Collision> other)
+{
+	if (std::find(colliding.begin(), colliding.end(), other) != colliding.end())
+	{
+		return;
+	}
+	onCollisionBegin.invoke(*this, *other);
+	colliding.push_back(other);
+}
+
 void Collision::update(float dt)
 {
+	collisionUpdate(dt);
+
 	move(v * dt + a * (dt * dt / 2));
+	rotate(angularSpeed * dt + angularAcceleration * (dt * dt / 2));
+	angularSpeed += angularAcceleration * dt;
 	v += a * dt;
 }
+
+void Collision::collisionUpdate(float dt)
+{
+	for (int i = 0; i < colliding.size(); i++)
+	{
+		if (isColiding(*colliding[i]))
+		{
+			onCollision.invoke(*this, *colliding[i]);
+		}
+		else
+		{
+			onCollisionEnd.invoke(*this, *colliding[i]);
+
+			colliding.erase(colliding.begin() + i);
+			i--;
+		}
+	}
+}
+

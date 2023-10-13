@@ -77,8 +77,8 @@ void Game::updatePhysics(float dt)
 
             if (collision1->isColiding(*collision2))
             {
-                collision1->onCollision.invoke(*collision1, *collision2);
-                collision2->onCollision.invoke(*collision2, *collision1);
+                collision1->collide(collision2);
+                collision2->collide(collision1);
             }
         }
     }

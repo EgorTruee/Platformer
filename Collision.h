@@ -26,15 +26,20 @@ public:
 	void setPoints(const std::vector<sf::Vector2f>& points);
 	void setVelocity(sf::Vector2f Velocity);
 	void setAcceleration(sf::Vector2f Acceleration);
+	void collide(std::shared_ptr<Collision> other);
 	void update(float dt);
 
-	Delegate<Collision&, Collision&> onCollision;
+	Delegate<Collision&, Collision&> onCollision, onCollisionBegin, onCollisionEnd;
 
 private:
 
+	void collisionUpdate(float dt);
+
 	std::vector<sf::Vector2f> points;
+	std::vector<std::shared_ptr<Collision>> colliding;
 	sf::Vector2f v = { 0, 0 };
 	sf::Vector2f a = { 0, 0 };
-	bool isColliding = false, wasColliding = false;
+	float angularSpeed = 10;
+	float angularAcceleration = 0;
 };
 
