@@ -14,6 +14,8 @@ public:
 	explicit Collision(sf::Vector2f position = { 0, 0 }, 
 		sf::Vector2f velocity = { 0, 0 },
 		sf::Vector2f acceleration = { 0, 0 }, 
+		float angularSpeed = 0,
+		float angularAcceleration = 0,
 		const std::vector<sf::Vector2f> vertex = {});
 	Collision(const Collision& other) = default;
 	Collision(Collision&& other) = default;

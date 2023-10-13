@@ -12,8 +12,8 @@
 Game::Game() :
     paused(true)
 {
-    createGameObject<Moving>(Collision({ 0,0 }, { 10, 10 }, { 0, 0 }, { {10, 10}, {-10, 10}, {-10, -10}, {10, -10} }));
-    createGameObject<Moving>(Collision({ 100, 100 }, { 0, 0 }, { 0, 0 }, { {10, 10}, {-10, 10}, {-10, -10}, {10, -10} }));
+    createGameObject<Moving>(Collision({ 0,0 }, { 10, 10 }, { 0, 0 }, 0, 0, { {10, 10}, {-10, 10}, {-10, -10}, {10, -10} }));
+    createGameObject<Moving>(Collision({ 100, 100 }, { 0, 0 }, { 0, 0 }, 0, 0, { {10, 10}, {-10, 10}, {-10, -10}, {10, -10} }));
 }
 
 void Game::start()

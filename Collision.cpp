@@ -3,14 +3,16 @@
 #include <algorithm>
 
 Collision::Collision(const std::vector<sf::Vector2f> vertex) :
-	points(vertex)
+	Collision({ 0, 0 }, { 0, 0 }, { 0, 0 }, 0.f, 0.f, vertex)
 {
 }
 
-Collision::Collision(sf::Vector2f position, sf::Vector2f Velocity, sf::Vector2f Acceleration, const std::vector<sf::Vector2f> vertex) :
+Collision::Collision(sf::Vector2f position, sf::Vector2f Velocity, sf::Vector2f Acceleration, float omega, float epsilon, const std::vector<sf::Vector2f> vertex) :
 	points(vertex),
 	v(Velocity),
-	a(Acceleration)
+	a(Acceleration),
+	angularSpeed(omega),
+	angularAcceleration(epsilon)
 {
 	setPosition(position);
 }
