@@ -18,14 +18,25 @@ public:
 	Collision(const Collision& other) = default;
 	Collision(Collision&& other) = default;
 
-	sf::FloatRect getBigRect() const;
 	bool isInside(const sf::Vector2f& pos) const;
 	bool isColiding(const Collision& other) const;
-	std::vector<sf::Vector2f> getPoints() const;
 
+	sf::FloatRect getBigRect() const;
+	std::vector<sf::Vector2f> getPoints() const;
+	float getAngularSpeed() const;
+	float getAngularAcceleration() const;
+
+	void setAngularSpeed(float omega);
+	void setAngularAcceleration(float epsilon);
 	void setPoints(const std::vector<sf::Vector2f>& points);
 	void setVelocity(sf::Vector2f Velocity);
 	void setAcceleration(sf::Vector2f Acceleration);
+
+	void addAngularSpeed(float omega);
+	void addAngularAcceleration(float epsilon);
+	void addVelocity(sf::Vector2f velocity);
+	void addAcceleration(sf::Vector2f acceleration);
+
 	void collide(std::shared_ptr<Collision> other);
 	void update(float dt);
 

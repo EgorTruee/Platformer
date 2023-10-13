@@ -66,6 +66,26 @@ std::vector<sf::Vector2f> Collision::getPoints() const
 	return points;
 }
 
+float Collision::getAngularSpeed() const
+{
+	return angularSpeed;
+}
+
+float Collision::getAngularAcceleration() const
+{
+	return angularAcceleration;
+}
+
+void Collision::setAngularSpeed(float omega)
+{
+	angularSpeed = omega;
+}
+
+void Collision::setAngularAcceleration(float epsilon)
+{
+	angularAcceleration = epsilon;
+}
+
 void Collision::setPoints(const std::vector<sf::Vector2f>& p)
 {
 	points = p;
@@ -79,6 +99,26 @@ void Collision::setVelocity(sf::Vector2f Velocity)
 void Collision::setAcceleration(sf::Vector2f Acceleration)
 {
 	a = Acceleration;
+}
+
+void Collision::addAngularSpeed(float omega)
+{
+	angularSpeed += omega;
+}
+
+void Collision::addAngularAcceleration(float epsilon)
+{
+	angularAcceleration += epsilon;
+}
+
+void Collision::addVelocity(sf::Vector2f velocity)
+{
+	v += velocity;
+}
+
+void Collision::addAcceleration(sf::Vector2f acceleration)
+{
+	a += acceleration;
 }
 
 void Collision::collide(std::shared_ptr<Collision> other)
