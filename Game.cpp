@@ -23,11 +23,13 @@ void Game::start()
     t1 = clock.getElapsedTime();
     paused = false;
 }
+
 void Game::stop()
 {
     update();
     paused = true;
 }
+
 void Game::update()
 {
     if (paused)

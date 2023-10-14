@@ -23,6 +23,8 @@ sf::FloatRect Collision::getBigRect() const
 
 	for (auto i : points)
 	{
+		i = getTransform() * i;
+
 		left = fminf(left, i.x);
 		top = fmaxf(top, i.y);
 		right = fmaxf(right, i.x);
@@ -76,6 +78,11 @@ float Collision::getAngularSpeed() const
 float Collision::getAngularAcceleration() const
 {
 	return angularAcceleration;
+}
+
+sf::Vector2f Collision::getNormalToEdge(int n) const
+{
+	return sf::Vector2f();
 }
 
 void Collision::setAngularSpeed(float omega)
