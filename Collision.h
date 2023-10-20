@@ -27,7 +27,7 @@ public:
 	std::vector<sf::Vector2f> getPoints() const;
 	float getAngularSpeed() const;
 	float getAngularAcceleration() const;
-	sf::Vector2f getNormalToEdge(int n) const;
+	sf::Vector2f getNormalToEdge(int number) const;
 
 	void setAngularSpeed(float omega);
 	void setAngularAcceleration(float epsilon);

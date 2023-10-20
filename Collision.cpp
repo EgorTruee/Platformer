@@ -55,11 +55,22 @@ bool Collision::isInside(const sf::Vector2f& pos) const
 
 bool Collision::isColiding(const Collision& other) const
 {
-	for (const auto& i : other.points)
+	for (int i = 0; i < points.size(); i++)
 	{
-		if (isInside(other.getTransform() * i))
+		sf::Vector2f a = points[(i + 1) % points.size()] - points[i];
+		sf::Vector2f r1 = points[i];
+
+		for (int j = 0; j < other.points.size(); j++)
 		{
-			return true;
+			sf::Vector2f b = (getInverseTransform() * other.getTransform() * other.points[(j + 1) % other.points.size()] - getInverseTransform() * other.getTransform() * other.points[j]);
+			sf::Vector2f deltaR = getInverseTransform() * (other.getTransform() * other.points[i]) - r1;
+			float t1 = (deltaR.y * b.x - deltaR.x * b.y) / (a.y * b.x - a.x * b.y);
+			float t2 = (deltaR.y * a.x - deltaR.x * a.y) / (a.y * b.x - a.x * b.y);
+
+			if (0 <= t1 && t1 < 1 && 0 <= t2 && t2 < 1)
+			{
+				return true;
+			}
 		}
 	}
 	return false;
@@ -82,7 +93,9 @@ float Collision::getAngularAcceleration() const
 
 sf::Vector2f Collision::getNormalToEdge(int n) const
 {
-	return sf::Vector2f();
+	sf::Vector2f a = points[(n + 1) % points.size()] - points[n % points.size()];
+
+	return sf::Vector2f(a.y, -a.x);
 }
 
 void Collision::setAngularSpeed(float omega)
