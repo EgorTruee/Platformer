@@ -98,6 +98,21 @@ sf::Vector2f Collision::getNormalToEdge(int n) const
 	return sf::Vector2f(a.y, -a.x);
 }
 
+int Collision::getCotegory() const
+{
+	return cotegory;
+}
+
+int Collision::getOverlapWith() const
+{
+	return overlapWith;
+}
+
+int Collision::getCollideWith() const
+{
+	return collideWith;
+}
+
 void Collision::setAngularSpeed(float omega)
 {
 	angularSpeed = omega;
@@ -121,6 +136,21 @@ void Collision::setVelocity(sf::Vector2f Velocity)
 void Collision::setAcceleration(sf::Vector2f Acceleration)
 {
 	a = Acceleration;
+}
+
+void Collision::setCotegory(int mask)
+{
+	cotegory = mask;
+}
+
+void Collision::setOverlapWith(int mask)
+{
+	overlapWith = mask;
+}
+
+void Collision::setCollideWith(int mask)
+{
+	collideWith = mask;
 }
 
 void Collision::addAngularSpeed(float omega)
@@ -149,7 +179,14 @@ void Collision::collide(std::shared_ptr<Collision> other)
 	{
 		return;
 	}
-	onCollisionBegin.invoke(*this, *other);
+	if (collideWith & other->cotegory)
+	{
+		onCollisionBegin.invoke(*this, *other);
+	}
+	if (overlapWith & other->cotegory)
+	{
+		onOverlapBegin.invoke(*this, *other);
+	}
 	colliding.push_back(other);
 }
 
@@ -169,11 +206,25 @@ void Collision::collisionUpdate(float dt)
 	{
 		if (isColiding(*colliding[i]))
 		{
-			onCollision.invoke(*this, *colliding[i]);
+			if (collideWith & colliding[i]->cotegory)
+			{
+				onCollision.invoke(*this, *colliding[i]);
+			}
+			if (overlapWith & colliding[i]->cotegory)
+			{
+				onOverlap.invoke(*this, *colliding[i]);
+			}
 		}
 		else
 		{
-			onCollisionEnd.invoke(*this, *colliding[i]);
+			if (collideWith & colliding[i]->cotegory)
+			{
+				onCollisionEnd.invoke(*this, *colliding[i]);
+			}
+			if (overlapWith & colliding[i]->cotegory)
+			{
+				onOverlapEnd.invoke(*this, *colliding[i]);
+			}
 
 			colliding.erase(colliding.begin() + i);
 			i--;

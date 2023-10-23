@@ -28,12 +28,18 @@ public:
 	float getAngularSpeed() const;
 	float getAngularAcceleration() const;
 	sf::Vector2f getNormalToEdge(int number) const;
+	int getCotegory() const;
+	int getOverlapWith() const;
+	int getCollideWith() const;
 
 	void setAngularSpeed(float omega);
 	void setAngularAcceleration(float epsilon);
 	void setPoints(const std::vector<sf::Vector2f>& points);
 	void setVelocity(sf::Vector2f Velocity);
 	void setAcceleration(sf::Vector2f Acceleration);
+	void setCotegory(int mask);
+	void setOverlapWith(int mask);
+	void setCollideWith(int mask);
 
 	void addAngularSpeed(float omega);
 	void addAngularAcceleration(float epsilon);
@@ -43,7 +49,8 @@ public:
 	void collide(std::shared_ptr<Collision> other);
 	void update(float dt);
 
-	Delegate<Collision&, Collision&> onCollision, onCollisionBegin, onCollisionEnd;
+	Delegate<Collision&, const Collision&> onCollision, onCollisionBegin, onCollisionEnd;
+	Delegate<Collision&, const Collision&> onOverlap, onOverlapBegin, onOverlapEnd;
 
 private:
 
@@ -55,5 +62,8 @@ private:
 	sf::Vector2f a = { 0, 0 };
 	float angularSpeed = 10;
 	float angularAcceleration = 0;
+	int cotegory = 0;
+	int collideWith = 0;
+	int overlapWith = 0;
 };
 
