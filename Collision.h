@@ -45,6 +45,8 @@ public:
 	void addAngularAcceleration(float epsilon);
 	void addVelocity(sf::Vector2f velocity);
 	void addAcceleration(sf::Vector2f acceleration);
+	void addCollideWith(int mask);
+	void addOverlapWith(int mask);
 
 	void collide(std::shared_ptr<Collision> other);
 	void update(float dt);

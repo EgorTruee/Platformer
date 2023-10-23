@@ -173,6 +173,16 @@ void Collision::addAcceleration(sf::Vector2f acceleration)
 	a += acceleration;
 }
 
+void Collision::addCollideWith(int mask)
+{
+	collideWith |= mask;
+}
+
+void Collision::addOverlapWith(int mask)
+{
+	overlapWith |= mask;
+}
+
 void Collision::collide(std::shared_ptr<Collision> other)
 {
 	if (std::find(colliding.begin(), colliding.end(), other) != colliding.end())
