@@ -4,10 +4,11 @@
 Moving::Moving(const Collision& collision) :
 	GameObject(collision)
 {
-	getCollision()->onCollision.attach(std::make_shared<std::function<void(Collision&, Collision&)>>([](Collision& one, Collision& two)
+	getCollision()->onCollisionBegin.attach(std::make_shared<
+		std::function<void(std::shared_ptr<Collision>, std::shared_ptr<const Collision>)>>(
+			[](std::shared_ptr<Collision> one, std::shared_ptr<const Collision> two)
 		{
-			one.setVelocity({ 0, 0 });
-			two.setVelocity({ 0, 0 });
+			one->setVelocity({ 0, 0 });
 		}));
 }
 
