@@ -49,14 +49,4 @@ void Controllable::onCollisionEnd(std::shared_ptr<Collision> one, std::shared_pt
 
 void Controllable::update(float dt)
 {
-	
-	if (floor.expired())
-	{
-		std::shared_ptr<const Collision> tempFloor = floor.lock();
-
-		CollisionInfo info = getCollision()->getCollisionInfo(*tempFloor);
-
-
-	}
-	GameObject::update(dt);
 }
