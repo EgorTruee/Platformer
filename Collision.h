@@ -6,7 +6,12 @@
 
 #include "Delegate.h"
 
-class Collision : public sf::Transformable
+struct CollisionInfo
+{
+	sf::Vector2f point;
+	sf::Vector2f normal;
+};
+class Collision : public sf::Transformable , public std::enable_shared_from_this<Collision>
 {
 public:
 
@@ -23,6 +28,7 @@ public:
 	bool isInside(const sf::Vector2f& pos) const;
 	bool isColiding(const Collision& other) const;
 
+	CollisionInfo getCollisionInfo(const Collision& other) const;
 	sf::FloatRect getBigRect() const;
 	std::vector<sf::Vector2f> getPoints() const;
 	float getAngularSpeed() const;
@@ -31,6 +37,8 @@ public:
 	int getCotegory() const;
 	int getOverlapWith() const;
 	int getCollideWith() const;
+	sf::Vector2f getVelocity() const;
+	sf::Vector2f getAcceleration() const;
 
 	void setAngularSpeed(float omega);
 	void setAngularAcceleration(float epsilon);
@@ -51,8 +59,8 @@ public:
 	void collide(std::shared_ptr<Collision> other);
 	void update(float dt);
 
-	Delegate<Collision&, const Collision&> onCollision, onCollisionBegin, onCollisionEnd;
-	Delegate<Collision&, const Collision&> onOverlap, onOverlapBegin, onOverlapEnd;
+	Delegate<std::shared_ptr<Collision>, std::shared_ptr<const Collision>> onCollision, onCollisionBegin, onCollisionEnd;
+	Delegate<std::shared_ptr<Collision>, std::shared_ptr<const Collision>> onOverlap, onOverlapBegin, onOverlapEnd;
 
 private:
 

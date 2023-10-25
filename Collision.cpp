@@ -17,6 +17,43 @@ Collision::Collision(sf::Vector2f position, sf::Vector2f Velocity, sf::Vector2f 
 	setPosition(position);
 }
 
+CollisionInfo Collision::getCollisionInfo(const Collision& other) const
+{
+	//TODO new algorythm of calculation of normal and point of collision
+
+	CollisionInfo info;
+	int intersections = 0;
+
+	for (int i = 0; i < points.size(); i++)
+	{
+		sf::Vector2f a = getTransform() * (points[(i + 1) % points.size()] - points[i]);
+		sf::Vector2f r1 = getTransform() * points[i];
+
+		for (int j = 0; j < other.points.size(); j++)
+		{
+			sf::Vector2f b = (other.getTransform() * other.points[(j + 1) % other.points.size()] - other.getTransform() * other.points[j]);
+			sf::Vector2f deltaR = (other.getTransform() * other.points[i]) - r1;
+			float t1 = (deltaR.y * b.x - deltaR.x * b.y) / (a.y * b.x - a.x * b.y);
+			float t2 = (deltaR.y * a.x - deltaR.x * a.y) / (a.y * b.x - a.x * b.y);
+
+			if (0 <= t1 && t1 < 1 && 0 <= t2 && t2 < 1)
+			{
+				info.point += r1 + t1 * a;
+				info.normal += other.getNormalToEdge(j);
+				intersections++;
+			}
+		}
+	}
+	if (intersections == 0)
+	{
+		//TODO throw exception
+	}
+	info.point /= static_cast<float>(intersections);
+	info.normal /= static_cast<float>(intersections);
+
+	return info;
+}
+
 sf::FloatRect Collision::getBigRect() const
 {
 	float left = 0, top = 0, right = 0, bottom = 0;
@@ -95,7 +132,7 @@ sf::Vector2f Collision::getNormalToEdge(int n) const
 {
 	sf::Vector2f a = points[(n + 1) % points.size()] - points[n % points.size()];
 
-	return sf::Vector2f(a.y, -a.x);
+	return getTransform() * sf::Vector2f(a.y, -a.x);
 }
 
 int Collision::getCotegory() const
@@ -111,6 +148,16 @@ int Collision::getOverlapWith() const
 int Collision::getCollideWith() const
 {
 	return collideWith;
+}
+
+sf::Vector2f Collision::getVelocity() const
+{
+	return v;
+}
+
+sf::Vector2f Collision::getAcceleration() const
+{
+	return a;
 }
 
 void Collision::setAngularSpeed(float omega)
@@ -191,11 +238,11 @@ void Collision::collide(std::shared_ptr<Collision> other)
 	}
 	if (collideWith & other->cotegory)
 	{
-		onCollisionBegin.invoke(*this, *other);
+		onCollisionBegin.invoke(shared_from_this(), other);
 	}
 	if (overlapWith & other->cotegory)
 	{
-		onOverlapBegin.invoke(*this, *other);
+		onOverlapBegin.invoke(shared_from_this(), other);
 	}
 	colliding.push_back(other);
 }
@@ -218,22 +265,22 @@ void Collision::collisionUpdate(float dt)
 		{
 			if (collideWith & colliding[i]->cotegory)
 			{
-				onCollision.invoke(*this, *colliding[i]);
+				onCollision.invoke(shared_from_this(), colliding[i]);
 			}
 			if (overlapWith & colliding[i]->cotegory)
 			{
-				onOverlap.invoke(*this, *colliding[i]);
+				onOverlap.invoke(shared_from_this(), colliding[i]);
 			}
 		}
 		else
 		{
 			if (collideWith & colliding[i]->cotegory)
 			{
-				onCollisionEnd.invoke(*this, *colliding[i]);
+				onCollisionEnd.invoke(shared_from_this(), colliding[i]);
 			}
 			if (overlapWith & colliding[i]->cotegory)
 			{
-				onOverlapEnd.invoke(*this, *colliding[i]);
+				onOverlapEnd.invoke(shared_from_this(), colliding[i]);
 			}
 
 			colliding.erase(colliding.begin() + i);

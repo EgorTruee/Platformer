@@ -14,18 +14,18 @@ public:
 	Controllable(const Controllable& other) = default;
 	Controllable(Controllable&& other) = default;
 
-	sf::Vector2f getWalkVelocity() const;
+	float getWalkVelocity() const;
 
-	void setWalkVelocity(sf::Vector2f v);
+	void setWalkVelocity(float v);
 
-	void onCollisionBegin(Collision& one, const Collision& two);
-	void onCollisionEnd(Collision& one, const Collision& two);
+	void onCollisionBegin(std::shared_ptr<Collision> one, std::shared_ptr<const Collision> two);
+	void onCollisionEnd(std::shared_ptr<Collision> one, std::shared_ptr<const Collision> two);
 
 	virtual void update(float dt) override;
 
 private:
 
-	sf::Vector2f walkV;
-	std::shared_ptr<const Collision> floor;
+	float walkV = 0;
+	std::weak_ptr<const Collision> floor;
 };
 

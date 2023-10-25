@@ -13,18 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{d70f4956-02d5-4584-8f31-a720000307e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\src">
+      <UniqueIdentifier>{fb78c1d0-d040-40b8-8e33-cb334b5f78e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\include">
+      <UniqueIdentifier>{b96e2e1f-6711-4ecd-b7f6-dfaa73afa391}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Moving.cpp">
@@ -33,25 +33,37 @@
     <ClCompile Include="Controllable.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Base\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Base\src</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Base\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Moving.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Delegate.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Controllable.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorMath.h">
+      <Filter>Base\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Base\include</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Base\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Base\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Delegate.h">
+      <Filter>Base\include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
