@@ -102,6 +102,13 @@
       <AdditionalLibraryDirectories>$(SFML32)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <Profile>false</Profile>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(SFML32)\bin\sfml-audio-d-2.dll  $(OutDir) /y /d
+xcopy $(SFML32)\bin\sfml-graphics-d-2.dll $(OutDir) /y /d
+xcopy $(SFML32)\bin\sfml-network-d-2.dll $(OutDir) /y /d
+xcopy $(SFML32)\bin\sfml-system-d-2.dll $(OutDir) /y /d
+xcopy $(SFML32)\bin\sfml-window-d-2.dll $(OutDir) /y /d</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -122,6 +129,13 @@
       <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SFML32)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(SFML32)\bin\sfml-audio-2.dll  $(OutDir) /y /d
+xcopy $(SFML32)\bin\sfml-graphics-2.dll $(OutDir) /y /d
+xcopy $(SFML32)\bin\sfml-network-2.dll $(OutDir) /y /d
+xcopy $(SFML32)\bin\sfml-system-2.dll $(OutDir) /y /d
+xcopy $(SFML32)\bin\sfml-window-2.dll $(OutDir) /y /d</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -139,6 +153,13 @@
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>false</Profile>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(SFML64)\bin\sfml-audio-d-2.dll  $(OutDir) /y /d
+xcopy $(SFML64)\bin\sfml-graphics-d-2.dll $(OutDir) /y /d
+xcopy $(SFML64)\bin\sfml-network-d-2.dll $(OutDir) /y /d
+xcopy $(SFML64)\bin\sfml-system-d-2.dll $(OutDir) /y /d
+xcopy $(SFML64)\bin\sfml-window-d-2.dll $(OutDir) /y /d</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -159,6 +180,13 @@
       <AdditionalLibraryDirectories>$(SFML64)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(SFML64)\bin\sfml-audio-2.dll  $(OutDir) /y /d
+xcopy $(SFML64)\bin\sfml-graphics-2.dll $(OutDir) /y /d
+xcopy $(SFML64)\bin\sfml-network-2.dll $(OutDir) /y /d
+xcopy $(SFML64)\bin\sfml-system-2.dll $(OutDir) /y /d
+xcopy $(SFML64)\bin\sfml-window-2.dll $(OutDir) /y /d</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Collision.cpp" />
