@@ -22,6 +22,6 @@ void GameObject::draw(sf::RenderTarget& target, sf::RenderStates state) const
 	
 	for (auto i : components)
 	{
-		target.draw(i, state);
+		target.draw(*i, state);
 	}
 }
