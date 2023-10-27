@@ -1,5 +1,8 @@
 #pragma once
 
+#include <type_traits>
+#include <math.h>
+
 #include <SFML/System/Vector2.hpp>
 
 template<typename T>
@@ -12,4 +15,10 @@ template<typename T>
 T squredLength(const sf::Vector2<T> a)
 {
 	return a.x * a.x + a.y * a.y;
+}
+
+template<typename T, std::enable_if<std::is_floating_point_v<T>>>
+T length(sf::Vector2<T> a)
+{
+	return sqrt(squredLength(a));
 }
