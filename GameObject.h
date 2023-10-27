@@ -1,31 +1,28 @@
 #pragma once
 
 #include <SFML/Graphics/Drawable.hpp>
+#include <SFML/Graphics/Transformable.hpp>
 
 #include <vector>
 #include <memory>
 
-class Collision;
+class Component;
 
-class GameObject : public sf::Drawable
+class GameObject : public sf::Drawable, public sf::Transformable
 {
 public:
 
 	GameObject();
-	explicit GameObject(const Collision& collider);
 	GameObject(const GameObject&) = default;
 	GameObject(GameObject&&) = default;
 
-	virtual void update(float delta) = 0;
+	std::vector<std::shared_ptr<Component>> getComponents() const;
 
-	void setPosition(sf::Vector2f position);
-	void setRotation(float angle);
+	void addComponent(std::shared_ptr<Component> component);
 
-	sf::Vector2f getPosition() const;
-	float getRotation() const;
-	std::shared_ptr<Collision> getCollision() const;
+	virtual void update(float delta);
 
-	virtual ~GameObject() {}
+	virtual ~GameObject() = default;
 
 protected:
 
@@ -33,6 +30,15 @@ protected:
 
 private:
 
-	std::shared_ptr<Collision> collision;
+	std::vector<std::shared_ptr<Component>> components;
 };
+ 
+inline std::vector<std::shared_ptr<Component>> GameObject::getComponents() const
+{
+	return components;
+}
 
+inline void GameObject::addComponent(std::shared_ptr<Component> component)
+{
+	components.push_back(component);
+}

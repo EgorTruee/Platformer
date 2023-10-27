@@ -33,7 +33,6 @@ protected:
 private:
 
 	void updateObjects(float dt);
-	void updatePhysics(float dt);
 
 	std::vector<std::shared_ptr<GameObject>> objects;
 	sf::Time t1, t2;
