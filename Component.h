@@ -6,7 +6,7 @@
 
 class GameObject;
 
-class Component : public sf::Drawable
+class Component : public sf::Drawable, public std::enable_shared_from_this<Component>
 {
 public:
 

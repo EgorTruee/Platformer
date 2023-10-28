@@ -1,7 +1,6 @@
 #include "Game.h"
 
 #include "GameObject.h"
-#include "Collision.h"
 
 #include <SFML/Graphics/RenderTarget.hpp>
 

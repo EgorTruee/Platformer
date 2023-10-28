@@ -26,7 +26,7 @@ public:
 	std::vector<sf::Vector2f> getVertexes() const;
 
 	void setVertexes(std::vector<sf::Vector2f> vertexes);
-
+	
 private:
 
 	std::vector<sf::Vector2f> points;
