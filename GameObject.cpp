@@ -14,6 +14,9 @@ inline void GameObject::update(float delta)
 	{
 		i->update(delta);
 	}
+	move(v * delta + a * (delta * delta / 2));
+
+	v += a * delta;
 }
 
 void GameObject::draw(sf::RenderTarget& target, sf::RenderStates state) const
