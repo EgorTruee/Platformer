@@ -7,7 +7,7 @@
 
 #include "GameObject.h"
 
-PhysicsComp::PhysicsComp(std::shared_ptr<GameObject> parent, Collider col) :
+PhysicsComp::PhysicsComp(std::weak_ptr<GameObject> parent, Collider col) :
 	Component(parent),
 	collider(col)
 {

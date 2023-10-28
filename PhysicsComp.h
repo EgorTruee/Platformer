@@ -12,7 +12,7 @@ class PhysicsComp : public Component, public sf::Transformable
 {
 public:
 
-	explicit PhysicsComp(std::shared_ptr<GameObject> parent, Collider col);
+	explicit PhysicsComp(std::weak_ptr<GameObject> parent, Collider col);
 	PhysicsComp(const PhysicsComp& other) = default;
 	PhysicsComp(PhysicsComp&& ohter) = default;
 

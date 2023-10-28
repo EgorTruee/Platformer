@@ -4,7 +4,9 @@
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 
-GameObject::GameObject()
+GameObject::GameObject(sf::Vector2f vel, sf::Vector2f acc) : 
+	v(vel),
+	a(acc)
 {
 }
 

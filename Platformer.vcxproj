@@ -105,9 +105,9 @@
     <PostBuildEvent>
       <Command>xcopy "$(SFML32)\bin\sfml-audio-d-2.dll" "$(OutDir)" /y /d
 xcopy "$(SFML32)\bin\sfml-graphics-d-2.dll" "$(OutDir)" /y /d
-xcopy "$(SFML32)\bin\sfml-network-d-2.dll" "$(OutDir) /y /d
-xcopy "$(SFML32)\bin\sfml-system-d-2.dll" "$(OutDir) /y /d
-xcopy "$(SFML32)\bin\sfml-window-d-2.dll" "$(OutDir) /y /d</Command>
+xcopy "$(SFML32)\bin\sfml-network-d-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML32)\bin\sfml-system-d-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML32)\bin\sfml-window-d-2.dll" "$(OutDir)" /y /d</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -155,11 +155,11 @@ xcopy "$(SFML32)\bin\sfml-window-2.dll" "$(OutDir)" /y /d</Command>
     </Link>
     <PostBuildEvent />
     <PostBuildEvent>
-      <Command>xcopy "$(SFML64)\bin\sfml-audio-2-d.dll"  "$(OutDir)" /y /d
-xcopy "$(SFML64)\bin\sfml-graphics-2-d.dll" "$(OutDir)" /y /d
-xcopy "$(SFML64)\bin\sfml-network-2-d.dll" "$(OutDir)" /y /d
-xcopy "$(SFML64)\bin\sfml-system-2-d.dll" "$(OutDir)" /y /d
-xcopy "$(SFML64)\bin\sfml-window-2-d.dll" "$(OutDir)" /y /d</Command>
+      <Command>xcopy "$(SFML64)\bin\sfml-audio-d-2.dll"  "$(OutDir)" /y /d
+xcopy "$(SFML64)\bin\sfml-graphics-d-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML64)\bin\sfml-network-d-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML64)\bin\sfml-system-d-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML64)\bin\sfml-window-d-2.dll" "$(OutDir)" /y /d</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -195,6 +195,7 @@ xcopy "$(SFML64)\bin\sfml-window-2.dll" "$(OutDir)" /y /d</Command>
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PhysicsComp.cpp" />
+    <ClCompile Include="TestObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collider.h" />
@@ -203,6 +204,7 @@ xcopy "$(SFML64)\bin\sfml-window-2.dll" "$(OutDir)" /y /d</Command>
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="PhysicsComp.h" />
+    <ClInclude Include="TestObject.h" />
     <ClInclude Include="VectorMath.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

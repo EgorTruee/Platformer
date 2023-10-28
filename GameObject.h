@@ -8,12 +8,12 @@
 
 class Component;
 
-class GameObject : public sf::Drawable, public sf::Transformable
+class GameObject : public sf::Drawable, public sf::Transformable, public std::enable_shared_from_this<GameObject>
 {
 public:
 
-	GameObject();
-	GameObject(const GameObject&) = default;
+	explicit GameObject(sf::Vector2f v = { 0, 0 }, sf::Vector2f a = { 0, 0 });
+	GameObject(const GameObject&) = default; 
 	GameObject(GameObject&&) = default;
 
 	virtual void update(float delta);
