@@ -10,7 +10,7 @@ class Component : public sf::Drawable, public std::enable_shared_from_this<Compo
 {
 public:
 
-	explicit Component(std::shared_ptr<GameObject> p) : parent(p) {}
+	explicit Component(std::weak_ptr<GameObject> p) : parent(p) {}
 
 	virtual void update(float dt) = 0;
 
@@ -19,7 +19,7 @@ public:
 	virtual ~Component() = default;
 protected:
 
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates state) const override = 0;
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates state) const override {}
 
 private:
 

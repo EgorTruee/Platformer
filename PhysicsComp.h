@@ -28,7 +28,7 @@ public:
 
 	void setCollider(const Collider& col);
 
-	Delegate<std::shared_ptr<PhysicsComp>, std::shared_ptr<const PhysicsComp>> onCollisionBegin, onCollisionEnd;
+	Delegate<std::shared_ptr<PhysicsComp>, std::shared_ptr<PhysicsComp>> onCollisionBegin, onCollisionEnd;
 
 protected:
 

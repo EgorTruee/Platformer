@@ -2,6 +2,9 @@
 
 #include <algorithm>
 
+#include <SFML\Graphics\VertexArray.hpp>
+#include <SFML\Graphics\RenderTarget.hpp>
+
 #include "GameObject.h"
 
 PhysicsComp::PhysicsComp(std::shared_ptr<GameObject> parent, Collider col) :
@@ -51,7 +54,7 @@ void PhysicsComp::update(float dt)
 
 			continue;
 		}
-		std::shared_ptr<const PhysicsComp> other = i->lock();
+		std::shared_ptr<PhysicsComp> other = i->lock();
 
 		if (!checkCollision(other))
 		{
@@ -64,4 +67,18 @@ void PhysicsComp::update(float dt)
 
 void PhysicsComp::draw(sf::RenderTarget & target, sf::RenderStates state) const
 {
+#ifdef _DEBUG
+
+	state.transform *= getTransform();
+
+	std::vector<sf::Vector2f> points = collider.getVertexes();
+	sf::VertexArray Arr(sf::LineStrip, points.size() + 1);
+
+	for (int i = 0; i <= points.size(); i++)
+	{
+		Arr[i].position = points[i % points.size()];
+	}
+	target.draw(Arr, state);
+
+#endif //_DEBUG
 }
