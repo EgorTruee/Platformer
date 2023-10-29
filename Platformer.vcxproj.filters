@@ -51,6 +51,9 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Base\src</Filter>
     </ClCompile>
+    <ClCompile Include="Ticker.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VectorMath.h">
@@ -79,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Base\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Ticker.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

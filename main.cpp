@@ -10,6 +10,7 @@ int main()
     std::shared_ptr<Game> game = getGame();
 
     game->setScene(std::make_shared<Scene>());
+    game->getCurrentScene()->start();
 
     while (window.isOpen())
     {
@@ -25,7 +26,7 @@ int main()
         }
         game->update();
         window.clear();
-        window.draw(*(game->getCurrentScene()));
+        window.draw(*game);
         window.display();
     }
 

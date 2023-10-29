@@ -5,6 +5,7 @@
 
 #include <vector>
 #include <memory>
+#include <type_traits>
 
 class Component;
 
@@ -43,6 +44,17 @@ private:
 	sf::Vector2f a;
 };
  
+template<typename Object, typename ...Args>
+std::shared_ptr<Object> createGameObject(Args&&... args)
+{
+	static_assert(std::is_base_of_v<GameObject, Object>, "Munst be inhereted from GameObject");
+
+	std::shared_ptr<Object> res = std::make_shared<Object>(std::forward<Args>(args)...);
+
+	res->initComponents();
+
+	return res;
+}
 inline std::vector<std::shared_ptr<Component>> GameObject::getComponents() const
 {
 	return components;

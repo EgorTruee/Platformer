@@ -4,10 +4,13 @@
 
 #include "GameObject.h"
 #include "ColliderComp.h"
+#include "TestObject.h"
 
 Scene::Scene(bool p) :
 	paused(p)
 {
+	addObject(createGameObject<TestObject>(sf::Vector2f(0, 0), sf::Vector2f(10, 10)));
+	addObject(createGameObject<TestObject>(sf::Vector2f(100, 100), sf::Vector2f(0, 0)));
 }
 
 void Scene::update()
