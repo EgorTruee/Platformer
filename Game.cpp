@@ -2,15 +2,11 @@
 
 #include <SFML\Graphics\RenderTarget.hpp>
 
-#include <iostream>
-
 #include "Scene.h"
 
 void Game::update()
 {
 	ticks.tick();
-
-	std::cout << getTPS() << std::endl;
 
 	scene->update();
 }

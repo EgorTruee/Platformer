@@ -25,6 +25,8 @@ void Scene::update()
 
 	gameTime += dt;
 
+	collisionUpdate();
+
 	for (auto i : objects)
 	{
 		i->update(dt.asSeconds());
@@ -61,5 +63,32 @@ void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	for (auto i : objects)
 	{
 		target.draw(*i, states);
+	}
+}
+
+void Scene::collisionUpdate()
+{
+	for (int i = 0; i < colliderComponents.size(); i++)
+	{
+		if (colliderComponents[i].expired())
+		{
+			continue;
+		}
+		std::shared_ptr<ColliderComp> col1 = colliderComponents[i].lock();
+
+		for (int j = i + 1; j < colliderComponents.size(); j++)
+		{
+			if (colliderComponents[j].expired())
+			{
+				continue;
+			}
+			std::shared_ptr<ColliderComp> col2 = colliderComponents[j].lock();
+
+			if (col1->checkCollision(col2))
+			{
+				col1->onCollision(col2);
+				col2->onCollision(col1);
+			}
+		}
 	}
 }

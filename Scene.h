@@ -37,6 +37,8 @@ protected:
 
 private:
 
+	void collisionUpdate();
+
 	std::vector<std::shared_ptr<GameObject>> objects;
 	std::vector<std::weak_ptr<ColliderComp>> colliderComponents;
 	sf::Clock clock;
