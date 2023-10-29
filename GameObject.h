@@ -17,6 +17,7 @@ public:
 	GameObject(GameObject&&) = default;
 
 	virtual void update(float delta);
+	void initComponents();
 
 	std::vector<std::shared_ptr<Component>> getComponents() const;
 	sf::Vector2f getVelocity() const;

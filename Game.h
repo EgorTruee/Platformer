@@ -45,6 +45,7 @@ inline std::shared_ptr<Object> Game::createGameObject(Args&&... args)
 {
 	std::shared_ptr<Object> t = std::make_shared<Object>(std::forward<Args>(args)...);
 
+	t->initComponents();
 	objects.push_back(t);
 
 	return t;

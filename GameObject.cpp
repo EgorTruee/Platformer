@@ -5,6 +5,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 
 GameObject::GameObject(sf::Vector2f vel, sf::Vector2f acc) : 
+	components(),
 	v(vel),
 	a(acc)
 {
@@ -19,6 +20,14 @@ inline void GameObject::update(float delta)
 	move(v * delta + a * (delta * delta / 2));
 
 	v += a * delta;
+}
+
+void GameObject::initComponents()
+{
+	for (auto i : components)
+	{
+		i->setParent(weak_from_this());
+	}
 }
 
 void GameObject::draw(sf::RenderTarget& target, sf::RenderStates state) const

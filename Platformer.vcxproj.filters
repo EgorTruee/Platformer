@@ -25,6 +25,9 @@
     <Filter Include="Base\include\Components">
       <UniqueIdentifier>{8b4e2a92-2bb3-4da7-b17e-75cca3ecaf08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Base\src\Components">
+      <UniqueIdentifier>{030bb05d-e408-42c6-9fe2-de77e7f2d16a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,10 +39,16 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Base\src</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsComp.cpp">
+    <ClCompile Include="Collider.cpp">
       <Filter>Base\src</Filter>
     </ClCompile>
-    <ClCompile Include="Collider.cpp">
+    <ClCompile Include="TestObject.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderComp.cpp">
+      <Filter>Base\src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
       <Filter>Base\src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,10 +68,16 @@
     <ClInclude Include="Component.h">
       <Filter>Base\include\Components</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsComp.h">
+    <ClInclude Include="ColliderComp.h">
       <Filter>Base\include\Components</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
+      <Filter>Base\include</Filter>
+    </ClInclude>
+    <ClInclude Include="TestObject.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
       <Filter>Base\include</Filter>
     </ClInclude>
   </ItemGroup>

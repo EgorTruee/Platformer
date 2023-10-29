@@ -1,4 +1,4 @@
-#include "PhysicsComp.h"
+#include "ColliderComp.h"
 
 #include <algorithm>
 
@@ -7,13 +7,12 @@
 
 #include "GameObject.h"
 
-PhysicsComp::PhysicsComp(std::weak_ptr<GameObject> parent, Collider col) :
-	Component(parent),
+ColliderComp::ColliderComp(Collider col) :
 	collider(col)
 {
 }
 
-bool PhysicsComp::checkCollision(std::shared_ptr<const PhysicsComp> other) const
+bool ColliderComp::checkCollision(std::shared_ptr<const ColliderComp> other) const
 {
 	sf::Transform toLocalCoordinats = getInverseTransform() * getParent()->getInverseTransform() *
 		other->getParent()->getTransform() * other->getTransform();
@@ -21,7 +20,7 @@ bool PhysicsComp::checkCollision(std::shared_ptr<const PhysicsComp> other) const
 	return collider.isColliding(other->collider, toLocalCoordinats);
 }
 
-void PhysicsComp::onCollision(std::shared_ptr<PhysicsComp> other)
+void ColliderComp::onCollision(std::shared_ptr<ColliderComp> other)
 {
 #ifdef _DEBUG
 
@@ -31,20 +30,20 @@ void PhysicsComp::onCollision(std::shared_ptr<PhysicsComp> other)
 	}
  #endif //_DEBUG
 
-	auto pradicate = [&other](const std::weak_ptr<PhysicsComp> i)
+	auto pradicate = [&other](const std::weak_ptr<ColliderComp> i)
 	{
 		return i.lock() == other;
 	};
 		
 	if (std::find_if(colliding.begin(), colliding.end(), pradicate) == colliding.end())
 	{
-		onCollisionBegin.invoke(std::static_pointer_cast<PhysicsComp>(shared_from_this()), other);
+		onCollisionBegin.invoke(std::static_pointer_cast<ColliderComp>(shared_from_this()), other);
 
-		colliding.push_back(std::weak_ptr<PhysicsComp>(other));
+		colliding.push_back(std::weak_ptr<ColliderComp>(other));
 	}
 }
 
-void PhysicsComp::update(float dt)
+void ColliderComp::update(float dt)
 {
 	for (auto i = colliding.begin(); i != colliding.end(); ++i)
 	{
@@ -54,18 +53,18 @@ void PhysicsComp::update(float dt)
 
 			continue;
 		}
-		std::shared_ptr<PhysicsComp> other = i->lock();
+		std::shared_ptr<ColliderComp> other = i->lock();
 
 		if (!checkCollision(other))
 		{
-			onCollisionEnd.invoke(std::static_pointer_cast<PhysicsComp>(shared_from_this()), other);
+			onCollisionEnd.invoke(std::static_pointer_cast<ColliderComp>(shared_from_this()), other);
 
 			colliding.erase(i);
 		}
 	}
 }
 
-void PhysicsComp::draw(sf::RenderTarget & target, sf::RenderStates state) const
+void ColliderComp::draw(sf::RenderTarget & target, sf::RenderStates state) const
 {
 #ifdef _DEBUG
 
