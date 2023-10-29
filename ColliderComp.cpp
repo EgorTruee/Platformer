@@ -45,21 +45,17 @@ void ColliderComp::onCollision(std::shared_ptr<ColliderComp> other)
 
 void ColliderComp::update(float dt)
 {
-	for (auto i = colliding.begin(); i != colliding.end(); ++i)
-	{
-		if (i->expired())
-		{
-			colliding.erase(i);
+	std::remove_if(colliding.begin(), colliding.end(), [](std::weak_ptr<ColliderComp> other) {return other.lock(); });
 
-			continue;
-		}
-		std::shared_ptr<ColliderComp> other = i->lock();
+	for (auto i : colliding)
+	{
+		std::shared_ptr<ColliderComp> other = i.lock();
 
 		if (!checkCollision(other))
 		{
 			onCollisionEnd.invoke(std::static_pointer_cast<ColliderComp>(shared_from_this()), other);
 
-			colliding.erase(i);
+			std::remove_if(colliding.begin(), colliding.end(), [other](std::weak_ptr<ColliderComp> comp) {return comp.lock() == other; });
 		}
 	}
 }

@@ -68,7 +68,7 @@ void Scene::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void Scene::collisionUpdate()
 {
-	for (int i = 0; i < colliderComponents.size(); i++)
+	for (int i = 0; i < colliderComponents.size() - 1; i++)
 	{
 		if (colliderComponents[i].expired())
 		{
