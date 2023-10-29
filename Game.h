@@ -1,52 +1,41 @@
 #pragma once
 
-#include <vector>
+#include <SFML\Graphics\Drawable.hpp>
+
 #include <memory>
 
-#include <SFML/Graphics/Drawable.hpp>
-#include <SFML/System/Time.hpp>
-#include <SFML/System/Clock.hpp>
+class Scene;
+class Game;
 
-class GameObject;
+std::shared_ptr<Game> getGame();
 
-class Game : public sf::Drawable
+class Game
 {
 public:
 
-	Game();
+	friend std::shared_ptr<Game> getGame();
 
-	void start();
-	void stop();
 	void update();
+	
+	std::shared_ptr<Scene> getCurrentScene();
 
-	bool isPaused() { return paused; }
-
-	~Game();
-
-	template<class Object, typename ...Args>
-	std::shared_ptr<Object> createGameObject(Args&&...);
-
-protected:
-
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	void setScene(std::shared_ptr<Scene> newScene);
 
 private:
 
-	void updateObjects(float dt);
+	Game() {}
+	Game(const Game& other) = delete;
+	Game(Game&& other) = delete;
 
-	std::vector<std::shared_ptr<GameObject>> objects;
-	sf::Time t1, t2;
-	sf::Clock clock;
-	bool paused;
+	std::shared_ptr<Scene> scene;
 };
 
-template<class Object, typename ...Args>
-inline std::shared_ptr<Object> Game::createGameObject(Args&&... args)
+inline std::shared_ptr<Scene> Game::getCurrentScene()
 {
-	std::shared_ptr<Object> t = std::make_shared<Object>(std::forward<Args>(args)...);
+	return scene;
+}
 
-	t->initComponents();
-	objects.push_back(t);
-
-	return t;
+inline void Game::setScene(std::shared_ptr<Scene> newScene)
+{
+	scene = newScene;
 }
