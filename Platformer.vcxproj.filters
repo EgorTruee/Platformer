@@ -54,6 +54,9 @@
     <ClCompile Include="Ticker.cpp">
       <Filter>Base\src</Filter>
     </ClCompile>
+    <ClCompile Include="Contorller.cpp">
+      <Filter>Base\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VectorMath.h">
@@ -84,6 +87,9 @@
       <Filter>Base\include</Filter>
     </ClInclude>
     <ClInclude Include="Ticker.h">
+      <Filter>Base\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Contorller.h">
       <Filter>Base\include</Filter>
     </ClInclude>
   </ItemGroup>
