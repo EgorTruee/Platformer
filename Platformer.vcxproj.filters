@@ -57,6 +57,9 @@
     <ClCompile Include="Contorller.cpp">
       <Filter>Base\src</Filter>
     </ClCompile>
+    <ClCompile Include="Charector.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VectorMath.h">
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="Contorller.h">
       <Filter>Base\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Charector.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

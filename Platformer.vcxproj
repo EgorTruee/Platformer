@@ -190,6 +190,7 @@ xcopy "$(SFML64)\bin\sfml-window-2.dll" "$(OutDir)" /y /d</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Charector.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Contorller.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -201,6 +202,7 @@ xcopy "$(SFML64)\bin\sfml-window-2.dll" "$(OutDir)" /y /d</Command>
     <ClCompile Include="Ticker.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Charector.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Contorller.h" />
