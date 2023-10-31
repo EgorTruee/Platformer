@@ -4,7 +4,10 @@
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 
-GameObject::GameObject()
+GameObject::GameObject(sf::Vector2f vel, sf::Vector2f acc) : 
+	components(),
+	v(vel),
+	a(acc)
 {
 }
 
@@ -13,6 +16,17 @@ inline void GameObject::update(float delta)
 	for (auto i : components)
 	{
 		i->update(delta);
+	}
+	move(v * delta + a * (delta * delta / 2));
+
+	v += a * delta;
+}
+
+void GameObject::initComponents()
+{
+	for (auto i : components)
+	{
+		i->setParent(weak_from_this());
 	}
 }
 

@@ -1,63 +1,28 @@
 #include "Game.h"
 
-#include "GameObject.h"
-#include "Collision.h"
+#include <SFML\Graphics\RenderTarget.hpp>
 
-#include <SFML/Graphics/RenderTarget.hpp>
-
-#include <algorithm>
-#include <iostream>
-
-Game::Game() :
-    paused(true)
-{
-}
-
-void Game::start()
-{
-    clock.restart();
-
-    t1 = clock.getElapsedTime();
-    paused = false;
-}
-
-void Game::stop()
-{
-    update();
-    paused = true;
-}
+#include "Scene.h"
 
 void Game::update()
 {
-    if (paused)
-    {
-        return;
-    }
-    t2 = clock.getElapsedTime();
-    
-    updateObjects((t2 - t1).asSeconds());
+	ticks.tick();
 
-    t1 = t2;
+	scene->update();
 }
 
-Game::~Game()
+std::shared_ptr<Game> getGame()
 {
+	static std::shared_ptr<Game> instance(nullptr);
+
+	if (!instance)
+	{
+		instance = std::shared_ptr<Game>(new Game());
+	}
+	return instance;
 }
 
-void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Game::draw(sf::RenderTarget& target, sf::RenderStates state) const
 {
-    for (auto& i : objects)
-    {
-        target.draw(*i, states);
-    }
+	target.draw(*scene, state);
 }
-
-void Game::updateObjects(float dt)
-{
-    for (auto& object : objects)
-    {
-        object->update(dt);
-    }
-}
-
-

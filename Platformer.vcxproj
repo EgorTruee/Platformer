@@ -103,11 +103,11 @@
       <Profile>false</Profile>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(SFML32)\bin\sfml-audio-d-2.dll  $(OutDir) /y /d
-xcopy $(SFML32)\bin\sfml-graphics-d-2.dll $(OutDir) /y /d
-xcopy $(SFML32)\bin\sfml-network-d-2.dll $(OutDir) /y /d
-xcopy $(SFML32)\bin\sfml-system-d-2.dll $(OutDir) /y /d
-xcopy $(SFML32)\bin\sfml-window-d-2.dll $(OutDir) /y /d</Command>
+      <Command>xcopy "$(SFML32)\bin\sfml-audio-d-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML32)\bin\sfml-graphics-d-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML32)\bin\sfml-network-d-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML32)\bin\sfml-system-d-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML32)\bin\sfml-window-d-2.dll" "$(OutDir)" /y /d</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -130,11 +130,11 @@ xcopy $(SFML32)\bin\sfml-window-d-2.dll $(OutDir) /y /d</Command>
       <AdditionalLibraryDirectories>$(SFML32)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(SFML32)\bin\sfml-audio-2.dll  $(OutDir) /y /d
-xcopy $(SFML32)\bin\sfml-graphics-2.dll $(OutDir) /y /d
-xcopy $(SFML32)\bin\sfml-network-2.dll $(OutDir) /y /d
-xcopy $(SFML32)\bin\sfml-system-2.dll $(OutDir) /y /d
-xcopy $(SFML32)\bin\sfml-window-2.dll $(OutDir) /y /d</Command>
+      <Command>xcopy "$(SFML32)\bin\sfml-audio-2.dll"  "$(OutDir)" /y /d
+xcopy "$(SFML32)\bin\sfml-graphics-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML32)\bin\sfml-network-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML32)\bin\sfml-system-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML32)\bin\sfml-window-2.dll" "$(OutDir)" /y /d</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -153,12 +153,13 @@ xcopy $(SFML32)\bin\sfml-window-2.dll $(OutDir) /y /d</Command>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>false</Profile>
     </Link>
+    <PostBuildEvent />
     <PostBuildEvent>
-      <Command>xcopy $(SFML64)\bin\sfml-audio-d-2.dll  $(OutDir) /y /d
-xcopy $(SFML64)\bin\sfml-graphics-d-2.dll $(OutDir) /y /d
-xcopy $(SFML64)\bin\sfml-network-d-2.dll $(OutDir) /y /d
-xcopy $(SFML64)\bin\sfml-system-d-2.dll $(OutDir) /y /d
-xcopy $(SFML64)\bin\sfml-window-d-2.dll $(OutDir) /y /d</Command>
+      <Command>xcopy "$(SFML64)\bin\sfml-audio-d-2.dll"  "$(OutDir)" /y /d
+xcopy "$(SFML64)\bin\sfml-graphics-d-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML64)\bin\sfml-network-d-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML64)\bin\sfml-system-d-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML64)\bin\sfml-window-d-2.dll" "$(OutDir)" /y /d</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -181,25 +182,37 @@ xcopy $(SFML64)\bin\sfml-window-d-2.dll $(OutDir) /y /d</Command>
       <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(SFML64)\bin\sfml-audio-2.dll  $(OutDir) /y /d
-xcopy $(SFML64)\bin\sfml-graphics-2.dll $(OutDir) /y /d
-xcopy $(SFML64)\bin\sfml-network-2.dll $(OutDir) /y /d
-xcopy $(SFML64)\bin\sfml-system-2.dll $(OutDir) /y /d
-xcopy $(SFML64)\bin\sfml-window-2.dll $(OutDir) /y /d</Command>
+      <Command>xcopy "$(SFML64)\bin\sfml-audio-2.dll"  "$(OutDir)" /y /d
+xcopy "$(SFML64)\bin\sfml-graphics-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML64)\bin\sfml-network-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML64)\bin\sfml-system-2.dll" "$(OutDir)" /y /d
+xcopy "$(SFML64)\bin\sfml-window-2.dll" "$(OutDir)" /y /d</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="Charector.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="Contorller.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ColliderComp.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="TestObject.cpp" />
+    <ClCompile Include="Ticker.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Collision.h" />
+    <ClInclude Include="Charector.h" />
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Contorller.h" />
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="ColliderComp.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="TestObject.h" />
+    <ClInclude Include="Ticker.h" />
     <ClInclude Include="VectorMath.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

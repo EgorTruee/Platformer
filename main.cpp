@@ -1,14 +1,16 @@
 #include <SFML/Graphics.hpp>
 
 #include "Game.h"
+#include "Scene.h"
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1000, 500), "Platformer"/*, sf::Style::Fullscreen */ );
     sf::Vector2f pos(0, 0), vel(100, 100);
-    Game game;
+    std::shared_ptr<Game> game = getGame();
 
-    game.start();
+    game->setScene(std::make_shared<Scene>());
+    game->getCurrentScene()->start();
 
     while (window.isOpen())
     {
@@ -19,26 +21,12 @@ int main()
                 window.close();
             if (event.type == sf::Event::KeyPressed)
             {
-                if (event.key.scancode == sf::Keyboard::Scan::Space)
-                {
-                    if (game.isPaused())
-                    {
-                        game.start();
-                    }
-                    else
-                    {
-                        game.stop();
-                    }
-                }
-                else
-                {
-                    window.close();
-                }
+                window.close();
             }
         }
-        game.update();
+        game->update();
         window.clear();
-        window.draw(game);
+        window.draw(*game);
         window.display();
     }
 
