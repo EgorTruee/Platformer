@@ -7,7 +7,7 @@
 #include "Ticker.h"
 
 class Scene;
-class Game;
+class Game; //momomonster
 
 std::shared_ptr<Game> getGame();
 
