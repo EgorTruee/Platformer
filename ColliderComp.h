@@ -5,14 +5,13 @@
 #include <vector>
 
 #include "Component.h"
-#include "Collider.h"
 #include "Delegate.h"
 
 class ColliderComp : public Component, public sf::Transformable
 {
 public:
 
-	explicit ColliderComp(Collider col);
+	explicit ColliderComp(const std::vector<sf::Vector2f>& vertexes);
 	ColliderComp(const ColliderComp& other) = default;
 	ColliderComp(ColliderComp&& ohter) = default;
 
@@ -20,13 +19,14 @@ public:
 	ColliderComp& operator=(ColliderComp&& other) = default;
 
 	bool checkCollision(std::shared_ptr<const ColliderComp> other) const;
+
 	void onCollision(std::shared_ptr<ColliderComp> other);
 	virtual void update(float dt) override;
 	
-	Collider getCollider() const;
+	std::vector<sf::Vector2f> getVertexes() const;
 	std::vector<std::weak_ptr<ColliderComp>> getCollidingComponents() const;
 
-	void setCollider(const Collider& col);
+	void setVertexes(const std::vector<sf::Vector2f>& vertexes);
 
 	Delegate<std::shared_ptr<ColliderComp>, std::shared_ptr<ColliderComp>> onCollisionBegin, onCollisionEnd;
 
@@ -35,13 +35,13 @@ protected:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates state) const override;
 private:
 
-	Collider collider;
+	std::vector<sf::Vector2f> points;
 	std::vector<std::weak_ptr<ColliderComp>> colliding;
 };
 
-inline Collider ColliderComp::getCollider() const
+inline std::vector<sf::Vector2f> ColliderComp::getVertexes() const
 {
-	return collider;
+	return points;
 }
 
 inline std::vector<std::weak_ptr<ColliderComp>> ColliderComp::getCollidingComponents() const
@@ -49,7 +49,7 @@ inline std::vector<std::weak_ptr<ColliderComp>> ColliderComp::getCollidingCompon
 	return colliding;
 }
 
-inline void ColliderComp::setCollider(const Collider& col)
+inline void ColliderComp::setVertexes(const std::vector<sf::Vector2f>& vertexes)
 {
-	collider = col;
+	points = vertexes;
 }
