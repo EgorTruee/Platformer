@@ -2,6 +2,7 @@
 
 #include "ColliderComp.h"
 #include "Controller.h"
+#include "VectorMath.h"
 
 Charector::Charector(std::shared_ptr<Controller> charControl) : 
 	controller(charControl)
@@ -14,6 +15,8 @@ Charector::Charector(std::shared_ptr<Controller> charControl) :
 void Charector::update(float dt)
 {
 	sf::Vector2f moveDirection = { controller->getAxisValue("moveX"), controller->getAxisValue("moveY") };
+
+	moveDirection /= length<float>(moveDirection);
 
 	setVelocity(moveDirection * 100.f);
 }
