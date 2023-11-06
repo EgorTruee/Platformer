@@ -20,7 +20,7 @@ public:
 
 private:
 
-	std::shared_ptr<Controller> contorller;
+	std::shared_ptr<Controller> controller;
 	std::shared_ptr<ColliderComp> collider;
 };
 

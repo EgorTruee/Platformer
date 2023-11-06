@@ -1,9 +1,10 @@
 #include "Charector.h"
 
 #include "ColliderComp.h"
+#include "Controller.h"
 
 Charector::Charector(std::shared_ptr<Controller> charControl) : 
-	contorller(charControl)
+	controller(charControl)
 {
 	collider = std::make_shared<ColliderComp>(std::vector<sf::Vector2f>({ {10, 10}, {10, -10}, {-10, -10}, {-10, 10} }));
 
@@ -12,6 +13,9 @@ Charector::Charector(std::shared_ptr<Controller> charControl) :
 
 void Charector::update(float dt)
 {
+	sf::Vector2f moveDirection = { controller->getAxisValue("moveX"), controller->getAxisValue("moveY") };
+
+	setVelocity(moveDirection * 100.f);
 }
 
 void Charector::onCollisionBegin(std::shared_ptr<ColliderComp> thisCollider, std::shared_ptr<ColliderComp> otherCollider)
