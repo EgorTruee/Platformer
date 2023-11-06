@@ -38,6 +38,27 @@ bool ColliderComp::checkCollision(std::shared_ptr<const ColliderComp> other) con
 	return false;
 }
 
+bool ColliderComp::isInside(sf::Vector2f point) const
+{
+	sf::Transform toLocalCoordinats = getInverseTransform() * getParent()->getInverseTransform();
+	sf::Vector2f b = toLocalCoordinats * point;
+	int t = 0;
+
+	for (int i = 1; i <= points.size(); i++)
+	{
+		sf::Vector2f p = points[(i - 1) % points.size()];
+		sf::Vector2f a = points[i % points.size()] - points[(i - 1) % points.size()];
+		float t2 = (p.y * a.x - p.x * a.y) / (b.y * a.x - b.x * a.y);
+		float t1 = (b.x * p.y - b.y * p.x) / (b.y * a.x - b.x * a.y);
+		
+		if (0 <= t1 && t1 < 1 && 0 <= t2 && t2 < 1)
+		{
+			t++;
+		}
+	}
+	return (t % 2) == 0;
+}
+
 void ColliderComp::onCollision(std::shared_ptr<ColliderComp> other)
 {
 #ifdef _DEBUG
@@ -93,4 +114,10 @@ void ColliderComp::draw(sf::RenderTarget & target, sf::RenderStates state) const
 	target.draw(Arr, state);
 
 #endif //_DEBUG
+}
+
+CollisionInfo ColliderComp::getCollisionInfo(std::shared_ptr<const ColliderComp> other) const
+{
+	CollisionInfo info;
+
 }

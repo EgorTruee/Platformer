@@ -7,6 +7,11 @@
 #include "Component.h"
 #include "Delegate.h"
 
+struct CollisionInfo
+{
+	sf::Vector2f nirmal = { 0, 0 };
+	sf::Vector2f point = { 0, 0 };
+};
 class ColliderComp : public Component, public sf::Transformable
 {
 public:
@@ -19,12 +24,13 @@ public:
 	ColliderComp& operator=(ColliderComp&& other) = default;
 
 	bool checkCollision(std::shared_ptr<const ColliderComp> other) const;
-
+	bool isInside(sf::Vector2f point) const;
 	void onCollision(std::shared_ptr<ColliderComp> other);
 	virtual void update(float dt) override;
 	
 	std::vector<sf::Vector2f> getVertexes() const;
 	std::vector<std::weak_ptr<ColliderComp>> getCollidingComponents() const;
+	CollisionInfo getCollisionInfo(std::shared_ptr<const ColliderComp> other) const;
 
 	void setVertexes(const std::vector<sf::Vector2f>& vertexes);
 
