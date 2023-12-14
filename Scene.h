@@ -10,6 +10,12 @@
 class GameObject;
 class ColliderComp;
 
+struct ReyCastRes
+{
+	bool isIntersects = false;
+	std::weak_ptr<ColliderComp> other;
+};
+
 class Scene final : public sf::Drawable 
 {
 public:
@@ -24,6 +30,7 @@ public:
 	void update();
 	void start();
 	void stop();
+	std::weak_ptr<ColliderComp> rayCast(sf::Vector2f begin, sf::Vector2f end);
 
 	void addObject(std::shared_ptr<GameObject> object);
 
