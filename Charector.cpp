@@ -1,13 +1,13 @@
 #include "Charector.h"
 
-#include "ColliderComp.h"
+#include "ColliderBox.h"
 #include "Controller.h"
 #include "VectorMath.h"
 
 Charector::Charector(std::shared_ptr<Controller> charControl) : 
 	controller(charControl)
 {
-	collider = std::make_shared<ColliderComp>(std::vector<sf::Vector2f>({ {10, 10}, {10, -10}, {-10, -10}, {-10, 10} }));
+	collider = std::make_shared<ColliderBox>(20, 20);
 
 	addComponent(collider);
 }

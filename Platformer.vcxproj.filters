@@ -39,9 +39,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Base\src</Filter>
     </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>Base\src</Filter>
-    </ClCompile>
     <ClCompile Include="ColliderComp.cpp">
       <Filter>Base\src\Components</Filter>
     </ClCompile>

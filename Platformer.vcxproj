@@ -191,7 +191,6 @@ xcopy "$(SFML64)\bin\sfml-window-2.dll" "$(OutDir)" /y /d</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Charector.cpp" />
-    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="ColliderBox.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />

@@ -4,8 +4,7 @@
 #include <iostream>
 
 #include "GameObject.h"
-#include "ColliderComp.h"
-#include "Collider.h"
+#include "ColliderBox.h"
 
 class TestObject : public GameObject
 {
@@ -20,7 +19,7 @@ public:
 	{ 
 		setPosition(pos);
 
-		comp = std::make_shared<ColliderComp>(std::vector<sf::Vector2f>({ sf::Vector2f(10, 10), sf::Vector2f(10, -10), sf::Vector2f(-10, -10), sf::Vector2f(-10, 10)}));
+		comp = std::make_shared<ColliderBox>(20, 20);
 		comp->onCollisionBegin.attach(makeListener<std::shared_ptr<ColliderComp>, std::shared_ptr<ColliderComp>>(
 			std::function<void(std::shared_ptr<ColliderComp>, std::shared_ptr<ColliderComp>)>([](std::shared_ptr<ColliderComp>, std::shared_ptr<ColliderComp>) 
 				{ std::cout << "Collision" << std::endl; })));
