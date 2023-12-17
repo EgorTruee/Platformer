@@ -17,7 +17,7 @@ T squredLength(const sf::Vector2<T> a)
 	return a.x * a.x + a.y * a.y;
 }
 
-template<typename T, std::enable_if<std::is_floating_point_v<T>>>
+template<typename T, std::enable_if_t<std::is_floating_point_v<T>, bool> = true>
 T length(sf::Vector2<T> a)
 {
 	return sqrt(squredLength(a));

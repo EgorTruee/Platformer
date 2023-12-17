@@ -4,7 +4,7 @@
 
 #include "Delegate.h"
 
-class Contorller
+class Controller
 {
 public:
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -191,7 +191,8 @@ xcopy "$(SFML64)\bin\sfml-window-2.dll" "$(OutDir)" /y /d</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Charector.cpp" />
-    <ClCompile Include="Contorller.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="ColliderBox.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
@@ -201,13 +202,15 @@ xcopy "$(SFML64)\bin\sfml-window-2.dll" "$(OutDir)" /y /d</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Charector.h" />
+    <ClInclude Include="ColliderBox.h" />
     <ClInclude Include="Component.h" />
-    <ClInclude Include="Contorller.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ColliderComp.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="TestObject.h" />
     <ClInclude Include="Ticker.h" />
     <ClInclude Include="VectorMath.h" />
   </ItemGroup>

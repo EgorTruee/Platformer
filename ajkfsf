@@ -1,0 +1,79 @@
+[33m54dd080[m[33m ([m[1;36mHEAD -> [m[1;32mNewCollisionHendling[m[33m, [m[1;31morigin/NewCollisionHendling[m[33m)[m HEAD@{0}: reset: moving to HEAD@{986501c}
+[33m54dd080[m[33m ([m[1;36mHEAD -> [m[1;32mNewCollisionHendling[m[33m, [m[1;31morigin/NewCollisionHendling[m[33m)[m HEAD@{1}: reset: moving to HEAD@{98650c}
+[33m54dd080[m[33m ([m[1;36mHEAD -> [m[1;32mNewCollisionHendling[m[33m, [m[1;31morigin/NewCollisionHendling[m[33m)[m HEAD@{2}: reset: moving to 54dd08089b6876298a54558421ba1d1bf9c753f3
+[33m6d2c225[m[33m ([m[1;32mCollisionInfo[m[33m)[m HEAD@{3}: reset: moving to 6d2c22522dfa416127cbfb684ebb2ff62c0beae6
+[33m8670bb8[m HEAD@{4}: reset: moving to 8670bb890c97e99e5abd64bfdd1b59058f325b58
+[33m6d2c225[m[33m ([m[1;32mCollisionInfo[m[33m)[m HEAD@{5}: reset: moving to 6d2c22522dfa416127cbfb684ebb2ff62c0beae6
+[33m3dd9f14[m HEAD@{6}: commit: ColliderBox added
+[33m174be52[m HEAD@{7}: commit: CollidingComp changed
+[33m6d2c225[m[33m ([m[1;32mCollisionInfo[m[33m)[m HEAD@{8}: reset: moving to 6d2c22522dfa416127cbfb684ebb2ff62c0beae6
+[33m6d2c225[m[33m ([m[1;32mCollisionInfo[m[33m)[m HEAD@{9}: reset: moving to 6d2c22522dfa416127cbfb684ebb2ff62c0beae6
+[33m1834eda[m HEAD@{10}: reset: moving to 1834eda31b3111b8d0bb2bc03b962c090a7c084f
+[33mb1a7efc[m[33m ([m[1;31morigin/development[m[33m, [m[1;32mdevelopment[m[33m)[m HEAD@{11}: reset: moving to b1a7efcfe057d7edec2610b6eb1eacab91a0ea62
+[33m986501c[m HEAD@{12}: commit: Smal corrections
+[33m484dcb6[m HEAD@{13}: commit: New RayCast made
+[33mba53041[m HEAD@{14}: commit: ColliderComp changed to interfeis and CollideBox added
+[33m6d2c225[m[33m ([m[1;32mCollisionInfo[m[33m)[m HEAD@{15}: checkout: moving from CollisionInfo to NewCollisionHendling
+[33m6d2c225[m[33m ([m[1;32mCollisionInfo[m[33m)[m HEAD@{16}: reset: moving to 6d2c22522dfa416127cbfb684ebb2ff62c0beae6
+[33m6d2c225[m[33m ([m[1;32mCollisionInfo[m[33m)[m HEAD@{17}: commit: RayCastRes made
+[33m54dd080[m[33m ([m[1;36mHEAD -> [m[1;32mNewCollisionHendling[m[33m, [m[1;31morigin/NewCollisionHendling[m[33m)[m HEAD@{18}: commit: ReyCast added to scene
+[33m3e428d6[m HEAD@{19}: checkout: moving from master to CollisionInfo
+[33m9b5a2de[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{20}: pull --progress --no-edit --no-stat --recurse-submodules=no origin: Fast-forward
+[33m848c518[m HEAD@{21}: checkout: moving from development to master
+[33mb1a7efc[m[33m ([m[1;31morigin/development[m[33m, [m[1;32mdevelopment[m[33m)[m HEAD@{22}: commit: CharectorMovement added
+[33m2afc363[m HEAD@{23}: commit: CharectorMovement added
+[33m2e169af[m HEAD@{24}: checkout: moving from CollisionInfo to development
+[33m3e428d6[m HEAD@{25}: commit: CollisionInfo added
+[33m2e169af[m HEAD@{26}: checkout: moving from development to CollisionInfo
+[33m2e169af[m HEAD@{27}: pull --progress --no-edit --no-stat --recurse-submodules=no origin: Fast-forward
+[33m28af1c9[m HEAD@{28}: checkout: moving from Collider&ColliderCompMerging to development
+[33me5a7106[m[33m ([m[1;31morigin/Collider&ColliderCompMerging[m[33m)[m HEAD@{29}: rebase (finish): returning to refs/heads/Collider&ColliderCompMerging
+[33me5a7106[m[33m ([m[1;31morigin/Collider&ColliderCompMerging[m[33m)[m HEAD@{30}: rebase (pick): ColiderComp and Collider are merged
+[33m28af1c9[m HEAD@{31}: rebase (start): checkout refs/heads/development
+[33me348146[m HEAD@{32}: checkout: moving from development to Collider&ColliderCompMerging
+[33m28af1c9[m HEAD@{33}: checkout: moving from Collider&ColliderCompMerging to development
+[33me348146[m HEAD@{34}: rebase (finish): returning to refs/heads/Collider&ColliderCompMerging
+[33me348146[m HEAD@{35}: rebase (pick): ColiderComp and Collider are merged
+[33m28af1c9[m HEAD@{36}: rebase (start): checkout refs/heads/development
+[33m3372a42[m HEAD@{37}: rebase (finish): returning to refs/heads/Collider&ColliderCompMerging
+[33m3372a42[m HEAD@{38}: rebase (pick): ColiderComp and Collider are merged
+[33m28af1c9[m HEAD@{39}: rebase (start): checkout refs/heads/development
+[33m4fa5337[m HEAD@{40}: checkout: moving from development to Collider&ColliderCompMerging
+[33m28af1c9[m HEAD@{41}: checkout: moving from Collider&ColliderCompMerging to development
+[33m4fa5337[m HEAD@{42}: commit: ColiderComp and Collider are merged
+[33m28af1c9[m HEAD@{43}: checkout: moving from development to Collider&ColliderCompMerging
+[33m28af1c9[m HEAD@{44}: pull --progress --no-edit --no-stat --recurse-submodules=no origin: Fast-forward
+[33m8670bb8[m HEAD@{45}: commit: Controller interface added
+[33m0bfd189[m HEAD@{46}: pull --progress --no-edit --no-stat --recurse-submodules=no origin: Fast-forward
+[33m6d7c185[m HEAD@{47}: commit: Scene added
+[33md845755[m HEAD@{48}: commit: fixes
+[33m23b948b[m HEAD@{49}: commit: GameObject update
+[33m2668829[m HEAD@{50}: pull --progress --no-edit --no-stat --recurse-submodules=no origin: Fast-forward
+[33me990cd1[m HEAD@{51}: commit: Physics componernt added
+[33m16d5d7a[m HEAD@{52}: commit: Collision deleted and collider added
+[33m548d7ff[m HEAD@{53}: commit: Component update
+[33m651be46[m HEAD@{54}: reset: moving to 651be46f1a852562b846c50b7d7880d1a8a1e185
+[33m23c3cf6[m HEAD@{55}: reset: moving to 23c3cf62d249778fa21f078c86c2c525974c5fda
+[33m651be46[m HEAD@{56}: reset: moving to 651be46f1a852562b846c50b7d7880d1a8a1e185
+[33me3355ac[m HEAD@{57}: reset: moving to e3355acf03b364d40100c290d915df0ff30ec4bf
+[33me3355ac[m HEAD@{58}: commit: Component update and structure created
+[33m651be46[m HEAD@{59}: commit: Component added
+[33mf0e6a99[m HEAD@{60}: commit: Component added
+[33ma2cba04[m HEAD@{61}: commit: After compilation script
+[33m580ff8a[m HEAD@{62}: commit: After compiling script
+[33m4879079[m HEAD@{63}: commit: macros update
+[33md4ac797[m HEAD@{64}: commit: VisualStudio macros fix
+[33m7dfd30e[m HEAD@{65}: revert: Revert "VisualStudio macros fix"
+[33m831ae6d[m HEAD@{66}: commit: VisualStudio macros fix
+[33m23c3cf6[m HEAD@{67}: pull --progress --no-edit --no-stat --recurse-submodules=no origin: Fast-forward
+[33m63e5f15[m HEAD@{68}: commit: Refactoring
+[33m15a781f[m HEAD@{69}: commit: Collision changed
+[33mc85dc60[m HEAD@{70}: commit: Adding different values made
+[33m0029cad[m HEAD@{71}: commit: onCollisionBegin and onCollisionEnd added and angular movement added
+[33m848c518[m HEAD@{72}: checkout: moving from master to development
+[33m848c518[m HEAD@{73}: checkout: moving from master to master
+[33m848c518[m HEAD@{74}: commit: OnCollision added
+[33m16a7042[m HEAD@{75}: commit: Delegate was made
+[33mccbe24b[m HEAD@{76}: commit: Collision added
+[33mb0288af[m HEAD@{77}: pull --progress --no-edit --no-stat --recurse-submodules=no origin: Fast-forward
+[33m3689c18[m HEAD@{78}: clone: from https://github.com/EgorTruee/Platformer.git

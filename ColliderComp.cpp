@@ -7,63 +7,11 @@
 
 #include "GameObject.h"
 
-ColliderComp::ColliderComp(const std::vector<sf::Vector2f>& vertexes) :
-	points(vertexes)
-{
-}
-
-bool ColliderComp::checkCollision(std::shared_ptr<const ColliderComp> other) const
-{
-	sf::Transform toLocalCoordinats = getInverseTransform() * getParent()->getInverseTransform() *
-		other->getParent()->getTransform() * other->getTransform();
-
-	for (int i = 0; i < points.size(); i++)
-	{
-		sf::Vector2f a = points[(i + 1) % points.size()] - points[i];
-		sf::Vector2f r1 = points[i];
-
-		for (int j = 0; j < other->points.size(); j++)
-		{
-			sf::Vector2f b = (toLocalCoordinats * other->points[(j + 1) % other->points.size()] - toLocalCoordinats * other->points[j]);
-			sf::Vector2f deltaR = toLocalCoordinats * other->points[i] - r1;
-			float t1 = (deltaR.y * b.x - deltaR.x * b.y) / (a.y * b.x - a.x * b.y);
-			float t2 = (deltaR.y * a.x - deltaR.x * a.y) / (a.y * b.x - a.x * b.y);
-
-			if (0 <= t1 && t1 < 1 && 0 <= t2 && t2 < 1)
-			{
-				return true;
-			}
-		}
-	}
-	return false;
-}
-
-bool ColliderComp::isInside(sf::Vector2f point) const
-{
-	sf::Transform toLocalCoordinats = getInverseTransform() * getParent()->getInverseTransform();
-	sf::Vector2f b = toLocalCoordinats * point;
-	int t = 0;
-
-	for (int i = 1; i <= points.size(); i++)
-	{
-		sf::Vector2f p = points[(i - 1) % points.size()];
-		sf::Vector2f a = points[i % points.size()] - points[(i - 1) % points.size()];
-		float t2 = (p.y * a.x - p.x * a.y) / (b.y * a.x - b.x * a.y);
-		float t1 = (b.x * p.y - b.y * p.x) / (b.y * a.x - b.x * a.y);
-		
-		if (0 <= t1 && t1 < 1 && 0 <= t2 && t2 < 1)
-		{
-			t++;
-		}
-	}
-	return (t % 2) == 0;
-}
-
 void ColliderComp::onCollision(std::shared_ptr<ColliderComp> other)
 {
 #ifdef _DEBUG
 
-	if (!checkCollision(other))
+	if (!isIntersects(other))
 	{
 		//TODO throw exception
 	}
@@ -84,40 +32,17 @@ void ColliderComp::onCollision(std::shared_ptr<ColliderComp> other)
 
 void ColliderComp::update(float dt)
 {
-	std::remove_if(colliding.begin(), colliding.end(), [](std::weak_ptr<ColliderComp> other) {return other.expired(); });
+	colliding.erase(std::remove_if(colliding.begin(), colliding.end(), [](std::weak_ptr<ColliderComp> other) {return other.expired(); }), colliding.end());
 
 	for (auto i : colliding)
 	{
 		std::shared_ptr<ColliderComp> other = i.lock();
 
-		if (!checkCollision(other))
+		if (!isIntersects(other))
 		{
 			onCollisionEnd.invoke(std::static_pointer_cast<ColliderComp>(shared_from_this()), other);
 
-			std::remove_if(colliding.begin(), colliding.end(), [other](std::weak_ptr<ColliderComp> comp) {return comp.lock() == other; });
+			colliding.erase(std::remove_if(colliding.begin(), colliding.end(), [other](std::weak_ptr<ColliderComp> comp) {return comp.lock() == other; }), colliding.end());
 		}
 	}
-}
-
-void ColliderComp::draw(sf::RenderTarget & target, sf::RenderStates state) const
-{
-#ifdef _DEBUG
-
-	state.transform *= getTransform();
-
-	sf::VertexArray Arr(sf::LineStrip, points.size() + 1);
-
-	for (int i = 0; i <= points.size(); i++)
-	{
-		Arr[i].position = points[i % points.size()];
-	}
-	target.draw(Arr, state);
-
-#endif //_DEBUG
-}
-
-CollisionInfo ColliderComp::getCollisionInfo(std::shared_ptr<const ColliderComp> other) const
-{
-	CollisionInfo info;
-
 }

@@ -39,6 +39,9 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Base\src</Filter>
     </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Base\src</Filter>
+    </ClCompile>
     <ClCompile Include="ColliderComp.cpp">
       <Filter>Base\src\Components</Filter>
     </ClCompile>
@@ -48,11 +51,11 @@
     <ClCompile Include="Ticker.cpp">
       <Filter>Base\src</Filter>
     </ClCompile>
-    <ClCompile Include="Contorller.cpp">
-      <Filter>Base\src</Filter>
-    </ClCompile>
     <ClCompile Include="Charector.cpp">
       <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderBox.cpp">
+      <Filter>Base\src\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,17 +77,23 @@
     <ClInclude Include="ColliderComp.h">
       <Filter>Base\include\Components</Filter>
     </ClInclude>
+    <ClInclude Include="TestObject.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Base\include</Filter>
     </ClInclude>
     <ClInclude Include="Ticker.h">
       <Filter>Base\include</Filter>
     </ClInclude>
-    <ClInclude Include="Contorller.h">
-      <Filter>Base\include</Filter>
-    </ClInclude>
     <ClInclude Include="Charector.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderBox.h">
+      <Filter>Base\include\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Base\include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
