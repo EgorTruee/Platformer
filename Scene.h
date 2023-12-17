@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <memory>
+#include <optional>
 
 class GameObject;
 class ColliderComp;
@@ -24,6 +25,7 @@ public:
 	void update();
 	void start();
 	void stop();
+	std::optional<float> rayCast(sf::Vector2f begin, sf::Vector2f end);
 
 	void addObject(std::shared_ptr<GameObject> object);
 

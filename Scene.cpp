@@ -33,6 +33,31 @@ void Scene::update()
 	}
 }
 
+std::optional<float> Scene::rayCast(sf::Vector2f begin, sf::Vector2f end)
+{
+	std::optional<float> res;
+
+	for (auto i : colliderComponents)
+	{
+		if (i.expired())
+		{
+			continue;
+		}
+		std::shared_ptr<ColliderComp> ptr = i.lock();
+
+		std::optional<float> t = ptr->isIntersects(begin, end);
+
+		if (res.has_value())
+		{
+			*res = fminf(t.value(), res.value());
+		}
+		else
+		{
+			res = t;
+		}
+	}
+	return res;
+}
 void Scene::addObject(std::shared_ptr<GameObject> object)
 {
 	objects.push_back(object);
