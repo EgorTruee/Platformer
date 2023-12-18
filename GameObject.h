@@ -47,7 +47,7 @@ private:
 template<typename Object, typename ...Args>
 std::shared_ptr<Object> createGameObject(Args&&... args)
 {
-	static_assert(std::is_base_of_v<GameObject, Object>, "Munst be inhereted from GameObject");
+	static_assert(std::is_base_of_v<GameObject, Object>, "Must be inhereted from GameObject");
 
 	std::shared_ptr<Object> res = std::make_shared<Object>(std::forward<Args>(args)...);
 

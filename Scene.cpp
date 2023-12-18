@@ -9,8 +9,16 @@
 Scene::Scene(bool p) :
 	paused(p)
 {
-	addObject(createGameObject<TestObject>(sf::Vector2f(0, 0), sf::Vector2f(10, 10)));
-	addObject(createGameObject<TestObject>(sf::Vector2f(100, 150), sf::Vector2f(0, 0)));
+	addObject(createGameObject<TestObject>(sf::Vector2f(0, 90), sf::Vector2f(10, 0)));
+	addObject(createGameObject<TestObject>(sf::Vector2f(100, 100), sf::Vector2f(0, 0)));
+
+	//for (int i = 0; i < 20; i++)
+	//{
+	//	std::optional<float> t = rayCast(sf::Vector2f(0, 10 * i), sf::Vector2f(200, 10 * i));
+
+	//	if (t.has_value())
+	//	std::cout << i << " " << t.value() * 200 << std::endl;
+	//}
 }
 
 void Scene::update()

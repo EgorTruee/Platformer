@@ -49,9 +49,9 @@ std::optional<float> ColliderBox::isIntersects(sf::Vector2f begin, sf::Vector2f 
 	{
 		sf::Vector2f b2 = { sgnx[i] * size.x / 2, sgny[i] * size.y / 2 };
 		sf::Vector2f a2 = sf::Vector2f(sgnx[(i + 1) % 4] * size.x / 2, sgny[(i + 1) % 4] * size.y / 2) - b2;
-		float det1 = (b2.x - b1.x) * a2.y - (b2.y - b1.y) * a2.x;
+		float det1 = -((b2.x - b1.x) * a2.y - (b2.y - b1.y) * a2.x);
 		float det2 = a1.x * (b2.y - b1.y) - a1.y * (b2.x - b1.x);
-		float detG = a1.x * a2.y - a1.y * a2.x;
+		float detG = -(a1.x * a2.y - a1.y * a2.x);
 
 		if (detG == 0)
 		{

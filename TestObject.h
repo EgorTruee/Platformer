@@ -24,6 +24,13 @@ public:
 			std::function<void(std::shared_ptr<ColliderComp>, std::shared_ptr<ColliderComp>, const CollisionInfo&)>
 			([](std::shared_ptr<ColliderComp>, std::shared_ptr<ColliderComp>, const CollisionInfo& info) 
 				{ std::cout << "Normal {" << info.normal.x << ", " << info.normal.y << "}" << std::endl; })));
+
+		comp->onCollisionEnd.attach(makeListener<std::shared_ptr<ColliderComp>, std::shared_ptr<ColliderComp>>(
+			std::function<void(std::shared_ptr<ColliderComp>, std::shared_ptr<ColliderComp>)>
+			([](std::shared_ptr<ColliderComp>, std::shared_ptr<ColliderComp>)
+				{
+					std::cout << "Collision end" << std::endl;
+				})));
 		addComponent(comp);
 	}
 };
