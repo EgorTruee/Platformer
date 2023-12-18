@@ -11,6 +11,8 @@
 struct CollisionInfo
 {
 	sf::Vector2f normal = { 0, 0 };
+	
+	CollisionInfo inverse() const;
 };
 class ColliderComp : public Component, public sf::Transformable
 {
@@ -32,3 +34,8 @@ private:
 
 	std::vector<std::weak_ptr<ColliderComp>> colliding;
 };
+
+inline CollisionInfo CollisionInfo::inverse() const
+{
+	return CollisionInfo(-normal);
+}
