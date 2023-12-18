@@ -7,7 +7,7 @@
 
 #include "GameObject.h"
 
-void ColliderComp::onCollision(std::shared_ptr<ColliderComp> other)
+void ColliderComp::onCollision(std::shared_ptr<ColliderComp> other, const CollisionInfo& info)
 {
 #ifdef _DEBUG
 
@@ -24,7 +24,7 @@ void ColliderComp::onCollision(std::shared_ptr<ColliderComp> other)
 		
 	if (std::find_if(colliding.begin(), colliding.end(), pradicate) == colliding.end())
 	{
-		onCollisionBegin.invoke(std::static_pointer_cast<ColliderComp>(shared_from_this()), other);
+		onCollisionBegin.invoke(std::static_pointer_cast<ColliderComp>(shared_from_this()), other, info);
 
 		colliding.push_back(std::weak_ptr<ColliderComp>(other));
 	}
@@ -37,8 +37,9 @@ void ColliderComp::update(float dt)
 	for (auto i : colliding)
 	{
 		std::shared_ptr<ColliderComp> other = i.lock();
+		std::optional<CollisionInfo> CollisionRes = isIntersects(other);
 
-		if (!isIntersects(other))
+		if (!CollisionRes.has_value())
 		{
 			onCollisionEnd.invoke(std::static_pointer_cast<ColliderComp>(shared_from_this()), other);
 

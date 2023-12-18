@@ -14,12 +14,13 @@ ColliderBox::ColliderBox(float height, float width) :
 {
 }
 
-bool ColliderBox::isIntersects(std::shared_ptr<const ColliderComp> other) const
+std::optional<CollisionInfo> ColliderBox::isIntersects(std::shared_ptr<const ColliderComp> other) const
 {
 	sf::Transform toGlobal = getParent()->getTransform() * getTransform();
-	bool res = isInside(other->getParent()->getTransform() * other->getPosition());
+	std::optional<CollisionInfo> res = (isInside(other->getParent()->getTransform() * other->getPosition()) ? CollisionInfo() : std::optional<CollisionInfo>());
 	const int sgnx[4] = { -1, 1, 1, -1 };
 	const int sgny[4] = { -1, -1, 1, 1 };
+	const sf::Vector2f normals[4] = { {0, -1}, {1, 0}, {0, 1}, {-1, 0} };
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -29,7 +30,7 @@ bool ColliderBox::isIntersects(std::shared_ptr<const ColliderComp> other) const
 
 		if (t.has_value())
 		{
-			res = true;
+			res = CollisionInfo(normals[i]);
 		}
 	}
 	return res;

@@ -10,7 +10,7 @@ Scene::Scene(bool p) :
 	paused(p)
 {
 	addObject(createGameObject<TestObject>(sf::Vector2f(0, 0), sf::Vector2f(10, 10)));
-	addObject(createGameObject<TestObject>(sf::Vector2f(100, 100), sf::Vector2f(0, 0)));
+	addObject(createGameObject<TestObject>(sf::Vector2f(100, 150), sf::Vector2f(0, 0)));
 }
 
 void Scene::update()
@@ -108,11 +108,12 @@ void Scene::collisionUpdate()
 				continue;
 			}
 			std::shared_ptr<ColliderComp> col2 = colliderComponents[j].lock();
+			std::optional<CollisionInfo> CollisionRes = col1->isIntersects(col2);
 
-			if (col1->isIntersects(col2))
+			if (CollisionRes.has_value())
 			{
-				col1->onCollision(col2);
-				col2->onCollision(col1);
+				col1->onCollision(col2, *CollisionRes);
+				col2->onCollision(col1, *CollisionRes);
 			}
 		}
 	}

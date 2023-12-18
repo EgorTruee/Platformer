@@ -20,9 +20,10 @@ public:
 		setPosition(pos);
 
 		comp = std::make_shared<ColliderBox>(20, 20);
-		comp->onCollisionBegin.attach(makeListener<std::shared_ptr<ColliderComp>, std::shared_ptr<ColliderComp>>(
-			std::function<void(std::shared_ptr<ColliderComp>, std::shared_ptr<ColliderComp>)>([](std::shared_ptr<ColliderComp>, std::shared_ptr<ColliderComp>) 
-				{ std::cout << "Collision" << std::endl; })));
+		comp->onCollisionBegin.attach(makeListener<std::shared_ptr<ColliderComp>, std::shared_ptr<ColliderComp>, const CollisionInfo&>(
+			std::function<void(std::shared_ptr<ColliderComp>, std::shared_ptr<ColliderComp>, const CollisionInfo&)>
+			([](std::shared_ptr<ColliderComp>, std::shared_ptr<ColliderComp>, const CollisionInfo& info) 
+				{ std::cout << "Normal {" << info.normal.x << ", " << info.normal.y << "}" << std::endl; })));
 		addComponent(comp);
 	}
 };
