@@ -11,7 +11,7 @@ class Charector : public GameObject
 {
 public:
 	
-	explicit Charector(std::shared_ptr<Controller> charControl);
+	explicit Charector(const std::string& name, std::shared_ptr<Controller> charControl);
 
 	virtual void update(float dt) override;
 	static void onCollisionBegin(std::shared_ptr<ColliderComp> thisCollider, std::shared_ptr<ColliderComp> otherCollider);

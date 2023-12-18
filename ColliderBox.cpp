@@ -4,12 +4,14 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 
-ColliderBox::ColliderBox(sf::Vector2f sizeVector) :
+ColliderBox::ColliderBox(const std::string& name, sf::Vector2f sizeVector) :
+	ColliderComp(name),
 	size(sizeVector)
 {
 }
 
-ColliderBox::ColliderBox(float height, float width) : 
+ColliderBox::ColliderBox(const std::string& name, float height, float width) : 
+	ColliderComp(name),
 	size(width, height)
 {
 }

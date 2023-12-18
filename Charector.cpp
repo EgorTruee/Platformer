@@ -4,10 +4,11 @@
 #include "Controller.h"
 #include "VectorMath.h"
 
-Charector::Charector(std::shared_ptr<Controller> charControl) : 
+Charector::Charector(const std::string& name, std::shared_ptr<Controller> charControl) :
+	GameObject(name),
 	controller(charControl)
 {
-	collider = std::make_shared<ColliderBox>(20, 20);
+	collider = std::make_shared<ColliderBox>("Box", 20, 20);
 
 	addComponent(collider);
 }

@@ -18,6 +18,8 @@ class ColliderComp : public Component, public sf::Transformable
 {
 public:
 
+	explicit ColliderComp(const std::string& name);
+
 	virtual std::optional<CollisionInfo> isIntersects(std::shared_ptr<const ColliderComp> other) const = 0;
 	virtual std::optional<float> isIntersects(sf::Vector2f begin, sf::Vector2f end) const = 0;
 	virtual bool isInside(sf::Vector2f point) const = 0;

@@ -9,8 +9,8 @@
 Scene::Scene(bool p) :
 	paused(p)
 {
-	addObject(createGameObject<TestObject>(sf::Vector2f(0, 90), sf::Vector2f(10, 0)));
-	addObject(createGameObject<TestObject>(sf::Vector2f(100, 100), sf::Vector2f(0, 0)));
+	addObject(createGameObject<TestObject>("Test1", sf::Vector2f(0, 90), sf::Vector2f(10, 0)));
+	addObject(createGameObject<TestObject>("Test2", sf::Vector2f(100, 100), sf::Vector2f(0, 0)));
 }
 
 void Scene::update()

@@ -7,6 +7,11 @@
 
 #include "GameObject.h"
 
+ColliderComp::ColliderComp(const std::string& name) :
+	Component(name)
+{
+}
+
 void ColliderComp::onCollision(std::shared_ptr<ColliderComp> other, const CollisionInfo& info)
 {
 #ifdef _DEBUG

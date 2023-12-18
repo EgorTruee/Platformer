@@ -4,8 +4,8 @@ class ColliderBox : public ColliderComp
 {
 public:
 
-	explicit ColliderBox(sf::Vector2f sizeVector);
-	ColliderBox(float height, float width);
+	explicit ColliderBox(const std::string& name, sf::Vector2f sizeVector);
+	ColliderBox(const std::string& name, float height, float width);
 	ColliderBox(const ColliderBox& other) = default;
 	ColliderBox(ColliderBox&& other) = default;
 
