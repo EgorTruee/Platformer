@@ -15,11 +15,7 @@ Charector::Charector(const std::string& name, std::shared_ptr<Controller> charCo
 
 void Charector::update(float dt)
 {
-	sf::Vector2f moveDirection = { controller->getAxisValue("moveX"), controller->getAxisValue("moveY") };
-
-	moveDirection /= length<float>(moveDirection);
-
-	setVelocity(moveDirection * 100.f);
+	
 }
 
 void Charector::onCollisionBegin(std::shared_ptr<ColliderComp> thisCollider, std::shared_ptr<ColliderComp> otherCollider)
