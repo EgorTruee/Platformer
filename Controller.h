@@ -21,7 +21,7 @@ protected:
 	{
 	public:
 
-		explicit Axis(const std::string& axisName);
+		Axis();
 		Axis(const Axis& other) = delete;
 		Axis(Axis&& other) = default;
 
@@ -34,19 +34,17 @@ protected:
 
 	private:
 
-		std::string name;
 		float value = 0;
 	};
 	class Button
 	{
 	public:
 
-		explicit Button(const std::string& buttonName);
+		Button();
 		Button(const Button& other) = delete;
 		Button(Button&& other) = default;
 
 		bool getValue() const;
-		std::string getName() const;
 
 		void setValue(bool value);
 
@@ -54,11 +52,10 @@ protected:
 
 	private:
 
-		std::string name;
 		bool value = false;
 	};
-	std::unordered_map<std::string_view, Axis> axises;
-	std::unordered_map<std::string_view, Button> buttons;
+	std::unordered_map<std::string, Axis> axises;
+	std::unordered_map<std::string, Button> buttons;
 };
 
 inline void Controller::subscribeOnAxisChange(const std::string& axisName, Listener<float> listener)
@@ -81,18 +78,12 @@ inline bool Controller::getButtonValue(const std::string& buttonName) const
 	return buttons.at(buttonName).getValue();
 }
 
-inline Controller::Axis::Axis(const std::string& axisName) :
-	name(axisName)
+inline Controller::Axis::Axis() 
 {}
 
 inline float Controller::Axis::getValue() const
 {
 	return value;
-}
-
-inline std::string Controller::Axis::getName() const
-{
-	return name;
 }
 
 inline void Controller::Axis::setValue(float newValue)
@@ -102,18 +93,12 @@ inline void Controller::Axis::setValue(float newValue)
 	value = newValue;
 }
 
-inline Controller::Button::Button(const std::string& buttonName) :
-	name(buttonName)
+inline Controller::Button::Button()
 {}
 
 inline bool Controller::Button::getValue() const
 {
 	return value;
-}
-
-inline std::string Controller::Button::getName() const
-{
-	return name;
 }
 
 inline void Controller::Button::setValue(bool newValue)
