@@ -5,6 +5,7 @@
 
 #include <vector>
 #include <memory>
+#include <string>
 #include <type_traits>
 
 class Component;
@@ -13,7 +14,7 @@ class GameObject : public sf::Drawable, public sf::Transformable, public std::en
 {
 public:
 
-	explicit GameObject(sf::Vector2f v = { 0, 0 }, sf::Vector2f a = { 0, 0 });
+	explicit GameObject(const std::string& objectName, sf::Vector2f v = { 0, 0 }, sf::Vector2f a = { 0, 0 });
 	GameObject(const GameObject&) = default; 
 	GameObject(GameObject&&) = default;
 
@@ -23,6 +24,7 @@ public:
 	std::vector<std::shared_ptr<Component>> getComponents() const;
 	sf::Vector2f getVelocity() const;
 	sf::Vector2f getAcceleration() const;
+	std::string getName() const;
 
 	void addComponent(std::shared_ptr<Component> component);
 	void addVelocity(sf::Vector2f vel);
@@ -39,6 +41,7 @@ protected:
 
 private:
 
+	std::string name;
 	std::vector<std::shared_ptr<Component>> components;
 	sf::Vector2f v;
 	sf::Vector2f a;
@@ -47,7 +50,7 @@ private:
 template<typename Object, typename ...Args>
 std::shared_ptr<Object> createGameObject(Args&&... args)
 {
-	static_assert(std::is_base_of_v<GameObject, Object>, "Munst be inhereted from GameObject");
+	static_assert(std::is_base_of_v<GameObject, Object>, "Must be inhereted from GameObject");
 
 	std::shared_ptr<Object> res = std::make_shared<Object>(std::forward<Args>(args)...);
 
@@ -68,6 +71,11 @@ inline sf::Vector2f GameObject::getVelocity() const
 inline sf::Vector2f GameObject::getAcceleration() const
 {
 	return a;
+}
+
+inline std::string GameObject::getName() const
+{
+	return name;
 }
 
 inline void GameObject::addComponent(std::shared_ptr<Component> component)

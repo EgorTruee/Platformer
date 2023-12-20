@@ -196,6 +196,7 @@ xcopy "$(SFML64)\bin\sfml-window-2.dll" "$(OutDir)" /y /d</Command>
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ColliderComp.cpp" />
+    <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Ticker.cpp" />
   </ItemGroup>
@@ -208,6 +209,7 @@ xcopy "$(SFML64)\bin\sfml-window-2.dll" "$(OutDir)" /y /d</Command>
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ColliderComp.h" />
+    <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="TestObject.h" />
     <ClInclude Include="Ticker.h" />

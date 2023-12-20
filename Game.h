@@ -8,6 +8,7 @@
 
 class Scene;
 class Game;
+class PlayerController;
 
 std::shared_ptr<Game> getGame();
 
@@ -31,12 +32,13 @@ protected:
 
 private:
 
-	Game() {}
+	Game();
 	Game(const Game& other) = delete;
 	Game(Game&& other) = delete;
 
 	std::shared_ptr<Scene> scene;
 	Ticker ticks;
+	std::shared_ptr<PlayerController> playerController;
 };
 
 inline std::shared_ptr<Scene> Game::getCurrentScene()

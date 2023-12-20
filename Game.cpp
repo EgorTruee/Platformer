@@ -3,12 +3,14 @@
 #include <SFML\Graphics\RenderTarget.hpp>
 
 #include "Scene.h"
+#include "PlayerController.h"
 
 void Game::update()
 {
 	ticks.tick();
 
 	scene->update();
+	playerController->update();
 }
 
 std::shared_ptr<Game> getGame()
@@ -26,3 +28,7 @@ void Game::draw(sf::RenderTarget& target, sf::RenderStates state) const
 {
 	target.draw(*scene, state);
 }
+
+Game::Game() :
+	playerController(getPlayerController())
+{}

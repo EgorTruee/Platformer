@@ -4,22 +4,25 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 
-ColliderBox::ColliderBox(sf::Vector2f sizeVector) :
+ColliderBox::ColliderBox(const std::string& name, sf::Vector2f sizeVector) :
+	ColliderComp(name),
 	size(sizeVector)
 {
 }
 
-ColliderBox::ColliderBox(float height, float width) : 
+ColliderBox::ColliderBox(const std::string& name, float height, float width) : 
+	ColliderComp(name),
 	size(width, height)
 {
 }
 
-bool ColliderBox::isIntersects(std::shared_ptr<const ColliderComp> other) const
+std::optional<CollisionInfo> ColliderBox::isIntersects(std::shared_ptr<const ColliderComp> other) const
 {
 	sf::Transform toGlobal = getParent()->getTransform() * getTransform();
-	bool res = isInside(other->getParent()->getTransform() * other->getPosition());
+	std::optional<CollisionInfo> res = (isInside(other->getParent()->getTransform() * other->getPosition()) ? CollisionInfo() : std::optional<CollisionInfo>());
 	const int sgnx[4] = { -1, 1, 1, -1 };
 	const int sgny[4] = { -1, -1, 1, 1 };
+	const sf::Vector2f normals[4] = { {0, -1}, {1, 0}, {0, 1}, {-1, 0} };
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -29,7 +32,7 @@ bool ColliderBox::isIntersects(std::shared_ptr<const ColliderComp> other) const
 
 		if (t.has_value())
 		{
-			res = true;
+			res = CollisionInfo(normals[i]);
 		}
 	}
 	return res;
@@ -48,9 +51,9 @@ std::optional<float> ColliderBox::isIntersects(sf::Vector2f begin, sf::Vector2f 
 	{
 		sf::Vector2f b2 = { sgnx[i] * size.x / 2, sgny[i] * size.y / 2 };
 		sf::Vector2f a2 = sf::Vector2f(sgnx[(i + 1) % 4] * size.x / 2, sgny[(i + 1) % 4] * size.y / 2) - b2;
-		float det1 = (b2.x - b1.x) * a2.y - (b2.y - b1.y) * a2.x;
+		float det1 = -((b2.x - b1.x) * a2.y - (b2.y - b1.y) * a2.x);
 		float det2 = a1.x * (b2.y - b1.y) - a1.y * (b2.x - b1.x);
-		float detG = a1.x * a2.y - a1.y * a2.x;
+		float detG = -(a1.x * a2.y - a1.y * a2.x);
 
 		if (detG == 0)
 		{
